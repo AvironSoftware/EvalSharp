@@ -1,0 +1,32 @@
+[
+  {
+    "input": "My internet connection is down. How can I reset my router?",
+    "actual_output": "Please try unplugging your router for 30 seconds and then plug it back in.",
+    "expected_output": "Unplug your router for 30 seconds, plug it back in, and check if the connection is restored. If not, contact technical support."
+  },
+  {
+    "input": "I have a slight fever and cough. What should I do right now?",
+    "actual_output": "Drink water and get some rest.",
+    "expected_output": "Monitor your symptoms closely, stay hydrated, and rest. If your fever or cough worsens, seek medical advice promptly."
+  },
+  {
+    "input": "Can you explain the Pythagorean theorem to me?",
+    "actual_output": "In a right triangle, a² + b² = c².",
+    "expected_output": "The Pythagorean theorem states that in a right-angled triangle, the sum of the squares of the two shorter sides (a and b) equals the square of the hypotenuse (c): a² + b² = c²."
+  },
+  {
+    "input": "What are the steps to file a small claims court case?",
+    "actual_output": "Fill out the required forms and pay the filing fee.",
+    "expected_output": "Generally, filing a small claims case involves completing the necessary forms, paying a filing fee, and serving the defendant with notice. Check your local court’s guidelines for specifics."
+  },
+  {
+    "input": "Which is the tallest mountain in the world?",
+    "actual_output": "Mount Everest is the tallest mountain in the world.",
+    "expected_output": "Mount Everest, standing at about 8,848 meters (29,029 feet), is recognized as the tallest mountain on Earth."
+  },
+  {
+    "input": "Please summarize the article on climate change impacts.",
+    "actual_output": "The article discusses climate change and its effects.",
+    "expected_output": "The article outlines how climate change is accelerating global temperature rise, leading to severe weather events and long-term environmental impacts, and stresses the urgency for collective action."
+  }
+]

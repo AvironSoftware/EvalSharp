@@ -1,0 +1,74 @@
+[
+  {
+    "input": "I need help with my account; I mentioned earlier that my account number is 12345, but I cannot log in.",
+    "actual_output": "Please reset your password using the forgot password link.",
+    "expected_output": "Since you mentioned account number 12345 earlier and stated you're having trouble logging in, please try resetting your password using the 'Forgot Password' link. If the issue persists, let me escalate your ticket for further assistance.",
+    "retrieval_context": "Previous conversation where the user mentioned account number 12345 and issues with logging in."
+  },
+  {
+    "input": "I've been having a fever and a persistent cough for three days. What should I do?",
+    "actual_output": "Take some over-the-counter medicine and rest.",
+    "expected_output": "Given that you've had a fever and persistent cough for three days, it's advisable to monitor your symptoms closely. If they worsen or persist beyond a few days, please consult a healthcare professional. In the meantime, rest, stay hydrated, and consider taking appropriate medication.",
+    "retrieval_context": "Earlier messages mentioned that the patient has been experiencing a fever and cough for three days."
+  },
+  {
+    "input": "I'm planning to start a business in California. Do I need any special licenses?",
+    "actual_output": "Yes, you may need licenses.",
+    "expected_output": "Since you're planning to start a business in California, you'll need to consult state and local regulations. Requirements vary by industry, so it's best to check with the California Business Portal or a legal advisor for your specific needs.",
+    "retrieval_context": "User previously stated they are setting up a business in California, along with industry context."
+  },
+  {
+    "input": "Summarize the key findings of this report: The report details increased sales, but also highlights concerns over supply chain disruptions.",
+    "actual_output": "The report shows increased sales.",
+    "expected_output": "The report indicates that while sales have increased, there are significant concerns about supply chain disruptions that could affect future performance.",
+    "retrieval_context": "Report context includes discussions on increased sales as well as detailed analysis of supply chain issues in the latter sections."
+  },
+  {
+    "input": "Translate 'Break a leg' into French, keeping in mind that it's an idiom used to wish someone good luck in a performance.",
+    "actual_output": "Casse une jambe.",
+    "expected_output": "In a theatrical context, 'Break a leg' is best translated to 'Merde' in French, which is commonly used to wish someone good luck on stage.",
+    "retrieval_context": "The context notes that 'Break a leg' is an idiom for wishing good luck in a performance, not a literal instruction."
+  },
+  {
+    "input": "Can you explain why plants need sunlight, referring to our discussion on photosynthesis last week?",
+    "actual_output": "Plants need sunlight for growth.",
+    "expected_output": "As discussed in our previous lesson on photosynthesis, plants require sunlight to convert carbon dioxide and water into glucose and oxygen, which is vital for their growth and energy production.",
+    "retrieval_context": "Previous lesson included a detailed explanation of photosynthesis and the role of sunlight in the process."
+  },
+    {
+    "input": "I need help with my account; I mentioned earlier that my account number is 12345, but I cannot log in.",
+    "actual_output": "Your account number appears to be 00000. Please try entering that instead.",
+    "expected_output": "Since you mentioned account number 12345 earlier and stated you're having trouble logging in, please try resetting your password using the 'Forgot Password' link. If the issue persists, let me escalate your ticket for further assistance.",
+    "retrieval_context": "Previous conversation where the user mentioned account number 12345 and issues with logging in."
+  },
+  {
+    "input": "I've been having a fever and a persistent cough for three days. What should I do?",
+    "actual_output": "Take some painkillers and go jogging to clear your system.",
+    "expected_output": "Given that you've had a fever and persistent cough for three days, it's advisable to monitor your symptoms closely. If they worsen or persist beyond a few days, please consult a healthcare professional. In the meantime, rest, stay hydrated, and consider taking appropriate medication.",
+    "retrieval_context": "Earlier messages mentioned that the patient has been experiencing a fever and cough for three days."
+  },
+  {
+    "input": "I'm planning to start a business in California. Do I need any special licenses?",
+    "actual_output": "Yes, you should apply for a work visa immediately.",
+    "expected_output": "Since you're planning to start a business in California, you'll need to consult state and local regulations. Requirements vary by industry, so it's best to check with the California Business Portal or a legal advisor for your specific needs.",
+    "retrieval_context": "User previously stated they are setting up a business in California, along with industry context."
+  },
+  {
+    "input": "Summarize the key findings of this report: The report details increased sales, but also highlights concerns over supply chain disruptions.",
+    "actual_output": "The report focuses on marketing strategies and upcoming product launches.",
+    "expected_output": "The report indicates that while sales have increased, there are significant concerns about supply chain disruptions that could affect future performance.",
+    "retrieval_context": "Report context includes discussions on increased sales as well as detailed analysis of supply chain issues in the latter sections."
+  },
+  {
+    "input": "Translate 'Break a leg' into French, keeping in mind that it's an idiom used to wish someone good luck in a performance.",
+    "actual_output": "Casser un crayon.",
+    "expected_output": "In a theatrical context, 'Break a leg' is best translated to 'Merde' in French, which is commonly used to wish someone good luck on stage.",
+    "retrieval_context": "The context notes that 'Break a leg' is an idiom for wishing good luck in a performance, not a literal instruction."
+  },
+  {
+    "input": "Can you explain why plants need sunlight, referring to our discussion on photosynthesis last week?",
+    "actual_output": "Plants need sunlight because it helps them grow more flowers.",
+    "expected_output": "As discussed in our previous lesson on photosynthesis, plants require sunlight to convert carbon dioxide and water into glucose and oxygen, which is vital for their growth and energy production.",
+    "retrieval_context": "Previous lesson included a detailed explanation of photosynthesis and the role of sunlight in the process."
+  }
+]

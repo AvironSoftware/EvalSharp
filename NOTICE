@@ -1,0 +1,7 @@
+Portions of this software are adapted from deepeval, which is licensed under the Apache License, Version 2.0.
+
+The reused components include adapted language model prompts and/or string resources from the original repository. These are used with modification and integration into this software.
+
+Copyright 2024 Confident AI Inc.
+Licensed under the Apache License, Version 2.0
+https://www.apache.org/licenses/LICENSE-2.0

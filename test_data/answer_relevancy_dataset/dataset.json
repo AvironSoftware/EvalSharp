@@ -1,0 +1,52 @@
+[
+  {
+    "input": "What is the capital of France?",
+    "actual_output": "Paris is the capital of France.",
+    "expected_output": "Paris."
+  },
+  {
+    "input": "How do I create a pivot table in Excel?",
+    "actual_output": "To create a pivot table, select your data and go to the Insert tab, then click Pivot Table.",
+    "expected_output": "Select your data, click Insert > Pivot Table, then choose the data range and location for the new table."
+  },
+  {
+    "input": "Explain the significance of the number 42 in The Hitchhiker's Guide to the Galaxy.",
+    "actual_output": "The number 42 represents the Answer to the Ultimate Question of Life, the Universe, and Everything.",
+    "expected_output": "42 is famously noted as the answer given by a supercomputer for the Ultimate Question of Life, the Universe, and Everything, though the actual question remains unknown."
+  },
+  {
+    "input": "What is the derivative of sin(x)?",
+    "actual_output": "The derivative of sin(x) is cos(x).",
+    "expected_output": "cos(x)."
+  },
+  {
+    "input": "Can you list the first three prime numbers?",
+    "actual_output": "The first three prime numbers are 2, 3, and 5.",
+    "expected_output": "2, 3, 5."
+  },
+  {
+    "input": "How do I change the color of text in HTML?",
+    "actual_output": "To change text color in HTML, you can use the style attribute, for example: <span style='color: red;'>Your text</span>.",
+    "expected_output": "You can change text color by using inline CSS such as: <span style='color: red;'>text</span> or via an external stylesheet."
+  },
+  {
+    "input": "What is the boiling point of water at sea level?",
+    "actual_output": "Water boils at 100 degrees Celsius at sea level.",
+    "expected_output": "100°C (212°F) at sea level."
+  },
+  {
+    "input": "Who wrote the novel '1984'?",
+    "actual_output": "George Orwell wrote the novel '1984'.",
+    "expected_output": "George Orwell."
+  },
+  {
+    "input": "What is the formula for calculating the area of a circle?",
+    "actual_output": "The area of a circle is calculated by the formula A = πr², where r is the radius.",
+    "expected_output": "A = πr²."
+  },
+  {
+    "input": "Can you provide a brief summary of the plot of Romeo and Juliet?",
+    "actual_output": "Romeo and Juliet is a tragedy by Shakespeare about two young star-crossed lovers whose deaths ultimately reconcile their feuding families.",
+    "expected_output": "A tragic love story by Shakespeare about two young lovers from rival families whose forbidden love leads to their untimely deaths, ultimately reconciling their families."
+  }
+]

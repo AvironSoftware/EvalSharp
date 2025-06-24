@@ -1,0 +1,50 @@
+{"input": "The product is amazing and exceeded my expectations.", "output": "Positive"}
+{"input": "I was extremely disappointed with the quality of the product.", "output": "Negative"}
+{"input": "The item arrived on time, but nothing exceptional about it.", "output": "Neutral"}
+{"input": "The customer service was excellent, and the product works perfectly.", "output": "Positive"}
+{"input": "The product broke after a week of use.", "output": "Negative"}
+{"input": "It is okay; not too bad, not too good.", "output": "Neutral"}
+{"input": "I absolutely love this! It’s exactly what I needed.", "output": "Positive"}
+{"input": "Very poor design and bad build quality.", "output": "Negative"}
+{"input": "The performance is satisfactory and meets the basic requirements.", "output": "Neutral"}
+{"input": "A fantastic purchase, I highly recommend it to everyone.", "output": "Positive"}
+{"input": "I regret buying this product, it's completely useless.", "output": "Negative"}
+{"input": "The product did its job without any fuss.", "output": "Neutral"}
+{"input": "Exceeded my expectations in every way.", "output": "Positive"}
+{"input": "The product didn't perform as advertised.", "output": "Negative"}
+{"input": "It’s just average, neither good nor bad.", "output": "Neutral"}
+{"input": "This is one of the best purchases I’ve ever made.", "output": "Positive"}
+{"input": "Totally disappointed, the quality was subpar.", "output": "Negative"}
+{"input": "The item is fine, but I've seen better.", "output": "Neutral"}
+{"input": "I am extremely happy with my purchase.", "output": "Positive"}
+{"input": "Not worth the money spent.", "output": "Negative"}
+{"input": "It functions as expected with no surprises.", "output": "Neutral"}
+{"input": "This product brings a lot of joy and convenience to my life.", "output": "Positive"}
+{"input": "The packaging was damaged, and the product didn't work properly.", "output": "Negative"}
+{"input": "I find the product acceptable for its price.", "output": "Neutral"}
+{"input": "Exceptional quality and superb performance.", "output": "Positive"}
+{"input": "Terrible customer support and a faulty product.", "output": "Negative"}
+{"input": "Average quality, nothing particularly remarkable.", "output": "Neutral"}
+{"input": "Absolutely delighted with the features and usability.", "output": "Positive"}
+{"input": "The item was defective right out of the box.", "output": "Negative"}
+{"input": "Neither impressive nor disappointing, just standard.", "output": "Neutral"}
+{"input": "Top-notch product and excellent value for money.", "output": "Positive"}
+{"input": "Regrettable experience; the product failed to meet expectations.", "output": "Negative"}
+{"input": "The product is mediocre but does the job.", "output": "Neutral"}
+{"input": "I am thrilled with the durability and performance.", "output": "Positive"}
+{"input": "Awful experience, I will never buy from this brand again.", "output": "Negative"}
+{"input": "It’s neither good nor bad; it’s just fine.", "output": "Neutral"}
+{"input": "The product is outstanding in every aspect.", "output": "Positive"}
+{"input": "It did not live up to its claims.", "output": "Negative"}
+{"input": "A balanced product that performs adequately.", "output": "Neutral"}
+{"input": "I am very satisfied with this purchase, it works like a charm.", "output": "Positive"}
+{"input": "Poor build and unsatisfactory performance.", "output": "Negative"}
+{"input": "The product is passable, but there are better options available.", "output": "Neutral"}
+{"input": "Superb quality and exceptional performance, a great buy!", "output": "Positive"}
+{"input": "The product stopped working after a few days.", "output": "Negative"}
+{"input": "Meets expectations, but doesn't exceed them.", "output": "Neutral"}
+{"input": "This is a brilliant product with excellent features.", "output": "Positive"}
+{"input": "Really bad, I am very upset with my purchase.", "output": "Negative"}
+{"input": "A standard product that does its intended job.", "output": "Neutral"}
+{"input": "I couldn't be happier, this product is a game-changer.", "output": "Positive"}
+{"input": "The product was a complete letdown and very disappointing.", "output": "Negative"}

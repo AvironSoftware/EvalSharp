@@ -1,0 +1,101 @@
+CustomerID,Name,Email,ProductCategory,AmountSpent,DateOfPurchase,PaymentMethod,IsFirstPurchase
+4c487fb0-95fa-4d3d-99b7-fc884f41e992,Julia Coleman,lindahall@hotmail.com,Home & Garden,328.31,2025-05-20,Gift Card,True
+b6b9c6c0-e182-43d0-bf87-cf2ba1627ed2,Sarah Pratt,vhorn@yahoo.com,Toys,441.96,2025-04-21,Cash,False
+7c66af80-3e65-46bc-b5c3-e84734e27618,Andrew Skinner,cmoon@gmail.com,Sports,75.11,2024-09-01,Credit Card,False
+0382a0d9-d88d-400d-8c79-6e7f959e0810,Andrew Fisher,griffithisabella@gmail.com,Toys,223.81,2025-04-30,PayPal,False
+cc98e416-3e5a-4cdb-8010-29d3cae72c26,Dr. David Villa,amandamendez@aguirre.com,Clothing,224.44,2024-12-31,Gift Card,False
+2d6de85d-5871-4a6c-9bbd-ec442164f790,Carla Logan,kylecaldwell@merritt.com,Sports,180.15,2024-07-28,Debit Card,True
+24d7d7e8-bbf1-4737-b223-0023720ec914,Oscar Garcia,paula22@gmail.com,Books,491.98,2025-05-02,Gift Card,True
+53ddc14f-30bb-4937-8b5d-44130ae332b4,Samantha Chandler,bdavis@wong-thornton.com,Groceries,36.68,2024-10-18,Debit Card,True
+4e52fbd6-d938-4f1f-9995-00ccfa32a8ce,Timothy Sexton,skirby@schmitt.com,Groceries,397.85,2025-05-21,Credit Card,False
+e66fc47e-5d66-41a8-a644-65a744ec3544,Lisa Wolf,kconley@yahoo.com,Clothing,289.51,2024-12-04,PayPal,True
+2f1d22ad-a29d-44a0-9a48-4a724319259c,David Buchanan,vanessarobinson@yahoo.com,Groceries,71.92,2024-10-31,Gift Card,True
+5c444b87-adea-44f4-b11c-907afef89e18,Travis Ramirez,latashajensen@trevino-alexander.net,Electronics,369.57,2024-10-08,Debit Card,False
+9375c2ad-d293-474a-8310-fd920c716be6,Jennifer Spence,michael73@harris.com,Groceries,245.42,2024-09-29,Gift Card,True
+1b0f949d-3e96-4ad5-a9c5-dfb3a8243b0e,Melanie Lopez,mirandahendricks@thompson-stephens.com,Home & Garden,331.32,2024-07-31,Debit Card,True
+e25c03c4-ad38-48c9-96b8-a97752e6d535,Jason Crawford,thomasjohnathan@hotmail.com,Home & Garden,456.24,2024-11-27,Gift Card,True
+e4854542-cb21-4aa2-9d10-f2c366406328,Thomas Schwartz,martinezjason@walter.biz,Groceries,401.61,2025-02-26,Credit Card,False
+c586c084-c660-4182-9665-0ed47f4d0f02,Jacob Decker,catherinegarcia@good-hamilton.info,Toys,253.34,2024-09-29,Credit Card,True
+dc7ee100-8ae5-408d-9134-7ab5e6237e67,Michelle Wang,grodriguez@mckee.biz,Toys,205.08,2024-10-20,Credit Card,True
+40ca44e9-cab9-41ec-bd2e-2398efa3c1cc,Krista Drake,mark07@yahoo.com,Groceries,120.83,2025-02-18,PayPal,False
+c31d950b-2deb-4193-b32b-984f3e1bf273,Joseph Simpson,sharpedwin@garcia.org,Sports,243.57,2025-03-05,Gift Card,False
+6cc7f03e-8af4-474f-978d-2a633097ce1d,Kimberly Sullivan,holmesaaron@gmail.com,Clothing,440.6,2025-01-21,Credit Card,True
+b1cad969-164f-49a6-82ad-8fac1a82e5b8,Ronald Blankenship,saraevans@hill.org,Toys,300.48,2025-02-03,Gift Card,False
+55f63482-d68a-4238-b263-70f06e7d4362,Lisa Lane,madisonfriedman@hill.info,Groceries,289.82,2025-03-31,Gift Card,False
+6103f6dc-403d-4177-8ffa-2c5d0bb45490,Amanda Randall,gjacobson@edwards.biz,Groceries,205.88,2024-08-20,PayPal,False
+3939ef30-efdd-4767-9a3f-e4d566fdd9e7,Timothy Lawrence,gfoster@hotmail.com,Books,466.5,2024-11-28,PayPal,False
+73cf8c26-0a8d-47a4-b6f7-aedc26e1e5fa,Isaac Jimenez,joseph13@yahoo.com,Toys,131.7,2024-06-19,Credit Card,True
+7312a65e-ec96-4853-b788-5fb7699ff7a5,Justin Robbins,suarezjennifer@moran.com,Sports,291.62,2024-09-20,Credit Card,False
+f308f00f-ba2c-43f1-9a31-7eb1246fa4e1,Tami Wilkerson,savannah90@yahoo.com,Clothing,22.71,2025-05-22,PayPal,False
+5c4a68a2-46f8-4505-ace9-05a4fc8de924,Paula Rodriguez,hermansteven@gmail.com,Home & Garden,347.8,2025-03-19,Credit Card,True
+c12a4116-47d6-4058-8e77-9fc5e764e514,Eddie Cole,nsmith@ramos.net,Sports,37.59,2024-09-20,Debit Card,False
+e4cc8f9c-437c-4c75-9583-ca7ebf4ee5e3,Steve Deleon,brianbest@hotmail.com,Sports,467.78,2024-09-25,Credit Card,True
+fa6824a4-ab21-414f-85dc-6fbe20b516af,Gary Hall DVM,hollypage@gmail.com,Sports,260.09,2024-07-03,Debit Card,False
+bf9d8cd6-1642-43b4-8496-6327323b35cc,Joel Walton,wleach@hotmail.com,Toys,497.5,2024-08-10,Cash,False
+959b6bdb-53db-40dd-b867-4e2edb31aed4,Donna Boyer,christinaboyd@yahoo.com,Electronics,383.5,2025-04-04,Gift Card,True
+176d034b-d2c1-4756-9417-7cfc41117d17,John Campbell,william23@gmail.com,Sports,318.03,2024-12-19,Cash,False
+8450a6a8-0f28-46c1-96f2-c6dae4ef0fd0,Carl Conner,flawson@guzman.com,Groceries,484.29,2024-12-08,Credit Card,True
+0463a6b4-46d0-4db2-96f0-b8d850f4b99f,Mary Goodwin,yrose@hotmail.com,Sports,400.11,2025-03-05,Cash,False
+b4e8cce5-ca7c-4748-9391-bdaa212a9174,Brenda Johnson,jamesgriffin@smith-davis.com,Sports,171.76,2024-10-16,Credit Card,False
+31ba6958-2dfa-4750-ba6f-5f0b89c555b7,Gary Perry,gcharles@hotmail.com,Toys,305.85,2025-04-25,PayPal,False
+515c2b87-ad52-4f42-9504-50fb40c57087,Christopher Adams,lisa66@yahoo.com,Books,116.2,2024-08-30,Debit Card,True
+fcb4eac3-d9e0-435d-8dbf-05b0d8eba821,Kimberly Garner,lorihopkins@gmail.com,Electronics,146.37,2024-11-05,Gift Card,True
+d0a7693c-e1ef-41ef-83b3-587802856a9c,Krystal Acosta,mjames@hotmail.com,Toys,13.42,2024-11-19,Cash,False
+066b901d-8be5-4e8d-a2f0-0e98e085b9d8,John Knapp,amber22@cook-guzman.com,Toys,141.13,2024-10-08,Gift Card,True
+108991bb-faa4-4f5a-bd8f-bed42d1dbded,Patricia Gibbs,davidsonashley@russell.com,Electronics,315.09,2024-08-07,Credit Card,False
+db84e5ee-b4a5-46a7-99e1-811003eefb22,Christopher Hogan,adavis@yahoo.com,Electronics,199.82,2024-09-03,Gift Card,True
+dd237621-340d-42ec-9df9-c6229257395d,Clayton Garrett,whitneywoodard@smith.com,Groceries,160.11,2025-02-20,Credit Card,False
+033cf0be-5666-45f4-9ba0-29f088c26fb8,Sarah Williams,glenda16@jones.com,Toys,367.84,2024-11-12,Debit Card,True
+22348a29-a7e4-4d0b-b817-02c665ad1b06,Carrie Anderson,kimberlywilliams@yahoo.com,Groceries,262.88,2024-10-14,Cash,False
+8b4c07e2-046a-4a9c-87b3-deaf3228cc5f,Patrick Quinn,boyersarah@yahoo.com,Clothing,493.91,2024-10-24,Cash,True
+3392d13b-e813-4b85-9276-3b57bafc737d,Tiffany Oconnor,janice44@thompson.com,Groceries,140.2,2024-12-17,Debit Card,False
+6f464c4d-972b-4943-bfad-84b7f43c41c6,Brandon Coleman,gibsonapril@yates-good.com,Electronics,382.59,2025-02-10,Cash,False
+af0c18b0-98e6-4a22-816e-fc86d6173a0e,Tammy Kelly,hollandcraig@hotmail.com,Books,205.12,2025-05-08,Debit Card,True
+f75c50c0-6a37-4139-bce9-06a5aacbb609,Kristin Wood,gabriella17@garcia-herman.org,Toys,419.06,2024-11-20,Credit Card,False
+0d6d0856-dc7c-45f1-b304-a404939e2689,Tamara Flores,lonniepalmer@miranda.info,Books,205.09,2024-06-20,Cash,False
+50fab805-f888-4922-97bd-97a0a4538772,Christopher Conner,ahaney@gmail.com,Clothing,457.99,2024-06-19,PayPal,True
+9eeb5637-e511-47fc-9bfb-1db352b4b911,Bobby Frazier,jeremycarter@yahoo.com,Books,381.97,2024-08-25,Cash,True
+cec86334-b326-466e-b21f-9917d2e35714,Emily Brown,davidlori@wilkerson.com,Home & Garden,242.01,2025-03-27,Credit Card,False
+d77d14d1-7ac0-4132-94a4-6e798b0fafcc,Kelli Day,xsmith@payne.biz,Sports,332.17,2024-07-30,Credit Card,False
+e6eaa730-49bb-40e4-850d-be640ff7e616,Matthew Waters,stacey76@davis.com,Sports,262.8,2025-02-20,Gift Card,False
+d5969e20-8fb1-4758-87c8-7e2f8a3a5c07,Benjamin Campbell,hayesjason@watson-hunter.org,Home & Garden,324.32,2024-07-02,PayPal,False
+d8398eb8-2ec7-486a-9a0f-457d34f4c224,Paul Smith,alansmith@gmail.com,Clothing,155.42,2025-03-06,Gift Card,False
+a3f8e761-2788-406e-be4a-6d3bf7b767a5,Jennifer Hudson,baileyjones@yahoo.com,Clothing,234.47,2024-08-27,Gift Card,True
+7044b035-410a-4165-9306-05d418248a59,Stephanie Smith,amandaturner@gmail.com,Groceries,211.82,2025-05-16,Debit Card,False
+7de306ca-92fc-4d59-b7ed-cec1ba713ed8,Sarah Suarez,bonnie37@yahoo.com,Clothing,66.52,2024-07-11,PayPal,False
+bd7d99f9-4f63-4a8d-93dd-eb4df47f8150,Deborah Reynolds,qvilla@gmail.com,Toys,217.68,2024-06-17,Gift Card,False
+ddc120f6-2c50-44f8-8648-57dd27cb2e31,Robert Phillips,davisrobert@hotmail.com,Home & Garden,137.78,2025-02-04,Gift Card,True
+b8e4c8db-42ac-441b-a332-aff9a9dd0352,Jeanette Edwards,danielsantos@yahoo.com,Groceries,85.83,2024-06-30,Credit Card,True
+185bc546-df10-465e-902c-c41804ae8fc4,Darlene Buchanan,uedwards@yahoo.com,Electronics,452.05,2024-10-17,Credit Card,False
+a8225797-847f-48b2-be88-48b603150be3,Amanda Roman,thompsondeanna@meyers.com,Toys,229.39,2024-09-28,Cash,False
+a658aebc-9d5e-4447-8554-5b0160e13c29,Eric Haney,lisacarlson@hotmail.com,Groceries,18.2,2024-08-28,PayPal,True
+7d4cdec6-8537-40c9-a21c-9a83cefcb7cf,Matthew Stuart,katherinepowell@hotmail.com,Sports,112.66,2024-08-17,Debit Card,False
+45587ba1-1785-4deb-ad9f-d0bec493fbbc,Maria Mccann,sharon13@mcdonald-rivera.com,Groceries,398.42,2024-07-27,Debit Card,False
+138be3d1-e1ca-4a4b-bb42-ea02f8e71f92,Kristin Berry,wardpatrick@cooper.biz,Groceries,27.88,2024-09-26,Credit Card,False
+222646a6-b2f2-4a7a-bdcd-c747ec12b941,Victor Ruiz,hollystokes@mcmillan-walsh.org,Sports,119.04,2024-12-11,Credit Card,True
+049c0f53-61bc-41be-ad98-55d49ab7fa94,Michelle Bass,boyerholly@hotmail.com,Sports,132.31,2025-02-26,Gift Card,True
+8087b716-355f-4a59-82d4-72bd8f81094f,Thomas Allen,vadams@yahoo.com,Home & Garden,50.42,2025-03-23,Credit Card,False
+7e43d0ae-8f38-4342-82dd-72ba83f46545,Lori Conley,adam61@gmail.com,Groceries,477.55,2024-11-24,PayPal,True
+55971667-c0ea-4c1b-9dde-23878c8c922d,Erin Jones,bradley50@miles.com,Home & Garden,47.31,2024-06-27,Debit Card,False
+6cd38974-c916-42f7-b12d-b97d6d721662,Zachary Christensen,samantha61@gmail.com,Toys,269.9,2025-04-19,Gift Card,True
+1c612d0c-0828-48db-b97e-b4b9f116e8ea,Brian Jones,rwilson@king.biz,Clothing,139.92,2025-05-14,Gift Card,True
+555d204c-957f-4dad-9978-c7d78fee99d2,Cindy Copeland,leonardortega@swanson.com,Toys,69.82,2024-12-26,Cash,False
+4a7ee1bc-dec3-4ef1-9324-202f65b5e8bc,Isabel Hall,ashleybaxter@melton.com,Electronics,254.58,2024-12-22,Credit Card,False
+35061d7b-934d-4683-beab-c1e25b0a97fb,Jesse Stephens,yvettemiller@gmail.com,Books,9.03,2025-01-27,Credit Card,False
+357c00a4-ef37-4606-8035-edcec951fe52,Brian Lee,tiffany23@wilkinson-meyer.info,Electronics,285.13,2024-12-24,PayPal,True
+f647e70b-d4f6-4b0b-b89d-b0ca81f06fae,Kurt Jackson,desireebass@hotmail.com,Home & Garden,296.75,2024-08-27,Credit Card,True
+d3428c9b-becc-48cb-965a-c37f44e67025,Elizabeth Peterson,stevebradley@yahoo.com,Electronics,95.07,2024-10-11,Credit Card,True
+5df01cc2-6745-4942-9b88-ecb9afa6f88a,Jamie Rogers,owu@strong.com,Books,460.31,2025-01-23,PayPal,True
+8f9bb9d9-054d-4b03-8a8f-49fd6ed4e38b,Sandra Mcconnell DVM,robertjames@marshall.info,Books,35.67,2024-11-19,PayPal,False
+3483a090-88a8-478b-b92f-cf18b9fcfcbc,Nathaniel Russell,kathy30@hotmail.com,Sports,484.77,2025-03-12,Cash,False
+b0554874-bf8b-4358-8c05-336cda915065,Robert Tucker,hhernandez@gmail.com,Clothing,141.9,2024-07-22,Cash,True
+e9fcc1b9-abb1-4df5-bcd0-e2824a141ca5,Nicholas Kelly,william74@gmail.com,Toys,318.39,2024-07-07,Cash,False
+6c7012dc-6ef7-4e01-8664-94f898e74223,Jennifer Gibson,summersjames@gmail.com,Sports,116.08,2024-07-29,Gift Card,False
+e4b41f2e-4bde-4f17-860b-2e8e4658f2d3,Luis Arias,peggyeverett@gmail.com,Groceries,83.56,2025-02-03,PayPal,False
+33a72053-03db-4e24-8627-13bf2c649b19,Vanessa Patterson,donaldmarks@hotmail.com,Toys,357.32,2024-12-15,Cash,False
+38810405-f298-4936-a7ec-8f1123d6ee58,Jason Davis,ronald80@yahoo.com,Electronics,401.54,2025-04-12,Cash,False
+d69c965e-9a73-4233-814b-f6371a6623b5,Kathryn Cole,jessicanguyen@wu.com,Toys,66.04,2024-10-09,Gift Card,False
+ed15695b-ddcf-48e2-aebb-d68718f9176e,Joshua Jackson,chase24@warren.net,Books,334.72,2024-11-03,Credit Card,False
+a42cffea-407a-47cc-af35-b90a7af02c08,Madison Conrad,stephen61@adkins-smith.com,Home & Garden,106.12,2024-07-04,Cash,True
+424eec9c-5c99-4b0c-81cd-b107b1a88714,Michelle Robinson,hansenrobert@rodriguez.com,Books,214.7,2024-07-29,Credit Card,True
+3da45cb2-2b8b-43ec-938c-1e143df6d715,Patricia Robinson,sharrison@meyers.org,Sports,356.83,2025-02-08,Debit Card,False

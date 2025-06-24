@@ -1,0 +1,1002 @@
+[
+	{
+		"CustomerID": "4c487fb0-95fa-4d3d-99b7-fc884f41e992",
+		"Name": "Julia Coleman",
+		"Email": "lindahall@hotmail.com",
+		"ProductCategory": "Home & Garden",
+		"AmountSpent": 328.31,
+		"DateOfPurchase": "2025-05-20T00:00:00.000",
+		"PaymentMethod": "Gift Card",
+		"IsFirstPurchase": true
+	},
+	{
+		"CustomerID": "b6b9c6c0-e182-43d0-bf87-cf2ba1627ed2",
+		"Name": "Sarah Pratt",
+		"Email": "vhorn@yahoo.com",
+		"ProductCategory": "Toys",
+		"AmountSpent": 441.96,
+		"DateOfPurchase": "2025-04-21T00:00:00.000",
+		"PaymentMethod": "Cash",
+		"IsFirstPurchase": false
+	},
+	{
+		"CustomerID": "7c66af80-3e65-46bc-b5c3-e84734e27618",
+		"Name": "Andrew Skinner",
+		"Email": "cmoon@gmail.com",
+		"ProductCategory": "Sports",
+		"AmountSpent": 75.11,
+		"DateOfPurchase": "2024-09-01T00:00:00.000",
+		"PaymentMethod": "Credit Card",
+		"IsFirstPurchase": false
+	},
+	{
+		"CustomerID": "0382a0d9-d88d-400d-8c79-6e7f959e0810",
+		"Name": "Andrew Fisher",
+		"Email": "griffithisabella@gmail.com",
+		"ProductCategory": "Toys",
+		"AmountSpent": 223.81,
+		"DateOfPurchase": "2025-04-30T00:00:00.000",
+		"PaymentMethod": "PayPal",
+		"IsFirstPurchase": false
+	},
+	{
+		"CustomerID": "cc98e416-3e5a-4cdb-8010-29d3cae72c26",
+		"Name": "Dr. David Villa",
+		"Email": "amandamendez@aguirre.com",
+		"ProductCategory": "Clothing",
+		"AmountSpent": 224.44,
+		"DateOfPurchase": "2024-12-31T00:00:00.000",
+		"PaymentMethod": "Gift Card",
+		"IsFirstPurchase": false
+	},
+	{
+		"CustomerID": "2d6de85d-5871-4a6c-9bbd-ec442164f790",
+		"Name": "Carla Logan",
+		"Email": "kylecaldwell@merritt.com",
+		"ProductCategory": "Sports",
+		"AmountSpent": 180.15,
+		"DateOfPurchase": "2024-07-28T00:00:00.000",
+		"PaymentMethod": "Debit Card",
+		"IsFirstPurchase": true
+	},
+	{
+		"CustomerID": "24d7d7e8-bbf1-4737-b223-0023720ec914",
+		"Name": "Oscar Garcia",
+		"Email": "paula22@gmail.com",
+		"ProductCategory": "Books",
+		"AmountSpent": 491.98,
+		"DateOfPurchase": "2025-05-02T00:00:00.000",
+		"PaymentMethod": "Gift Card",
+		"IsFirstPurchase": true
+	},
+	{
+		"CustomerID": "53ddc14f-30bb-4937-8b5d-44130ae332b4",
+		"Name": "Samantha Chandler",
+		"Email": "bdavis@wong-thornton.com",
+		"ProductCategory": "Groceries",
+		"AmountSpent": 36.68,
+		"DateOfPurchase": "2024-10-18T00:00:00.000",
+		"PaymentMethod": "Debit Card",
+		"IsFirstPurchase": true
+	},
+	{
+		"CustomerID": "4e52fbd6-d938-4f1f-9995-00ccfa32a8ce",
+		"Name": "Timothy Sexton",
+		"Email": "skirby@schmitt.com",
+		"ProductCategory": "Groceries",
+		"AmountSpent": 397.85,
+		"DateOfPurchase": "2025-05-21T00:00:00.000",
+		"PaymentMethod": "Credit Card",
+		"IsFirstPurchase": false
+	},
+	{
+		"CustomerID": "e66fc47e-5d66-41a8-a644-65a744ec3544",
+		"Name": "Lisa Wolf",
+		"Email": "kconley@yahoo.com",
+		"ProductCategory": "Clothing",
+		"AmountSpent": 289.51,
+		"DateOfPurchase": "2024-12-04T00:00:00.000",
+		"PaymentMethod": "PayPal",
+		"IsFirstPurchase": true
+	},
+	{
+		"CustomerID": "2f1d22ad-a29d-44a0-9a48-4a724319259c",
+		"Name": "David Buchanan",
+		"Email": "vanessarobinson@yahoo.com",
+		"ProductCategory": "Groceries",
+		"AmountSpent": 71.92,
+		"DateOfPurchase": "2024-10-31T00:00:00.000",
+		"PaymentMethod": "Gift Card",
+		"IsFirstPurchase": true
+	},
+	{
+		"CustomerID": "5c444b87-adea-44f4-b11c-907afef89e18",
+		"Name": "Travis Ramirez",
+		"Email": "latashajensen@trevino-alexander.net",
+		"ProductCategory": "Electronics",
+		"AmountSpent": 369.57,
+		"DateOfPurchase": "2024-10-08T00:00:00.000",
+		"PaymentMethod": "Debit Card",
+		"IsFirstPurchase": false
+	},
+	{
+		"CustomerID": "9375c2ad-d293-474a-8310-fd920c716be6",
+		"Name": "Jennifer Spence",
+		"Email": "michael73@harris.com",
+		"ProductCategory": "Groceries",
+		"AmountSpent": 245.42,
+		"DateOfPurchase": "2024-09-29T00:00:00.000",
+		"PaymentMethod": "Gift Card",
+		"IsFirstPurchase": true
+	},
+	{
+		"CustomerID": "1b0f949d-3e96-4ad5-a9c5-dfb3a8243b0e",
+		"Name": "Melanie Lopez",
+		"Email": "mirandahendricks@thompson-stephens.com",
+		"ProductCategory": "Home & Garden",
+		"AmountSpent": 331.32,
+		"DateOfPurchase": "2024-07-31T00:00:00.000",
+		"PaymentMethod": "Debit Card",
+		"IsFirstPurchase": true
+	},
+	{
+		"CustomerID": "e25c03c4-ad38-48c9-96b8-a97752e6d535",
+		"Name": "Jason Crawford",
+		"Email": "thomasjohnathan@hotmail.com",
+		"ProductCategory": "Home & Garden",
+		"AmountSpent": 456.24,
+		"DateOfPurchase": "2024-11-27T00:00:00.000",
+		"PaymentMethod": "Gift Card",
+		"IsFirstPurchase": true
+	},
+	{
+		"CustomerID": "e4854542-cb21-4aa2-9d10-f2c366406328",
+		"Name": "Thomas Schwartz",
+		"Email": "martinezjason@walter.biz",
+		"ProductCategory": "Groceries",
+		"AmountSpent": 401.61,
+		"DateOfPurchase": "2025-02-26T00:00:00.000",
+		"PaymentMethod": "Credit Card",
+		"IsFirstPurchase": false
+	},
+	{
+		"CustomerID": "c586c084-c660-4182-9665-0ed47f4d0f02",
+		"Name": "Jacob Decker",
+		"Email": "catherinegarcia@good-hamilton.info",
+		"ProductCategory": "Toys",
+		"AmountSpent": 253.34,
+		"DateOfPurchase": "2024-09-29T00:00:00.000",
+		"PaymentMethod": "Credit Card",
+		"IsFirstPurchase": true
+	},
+	{
+		"CustomerID": "dc7ee100-8ae5-408d-9134-7ab5e6237e67",
+		"Name": "Michelle Wang",
+		"Email": "grodriguez@mckee.biz",
+		"ProductCategory": "Toys",
+		"AmountSpent": 205.08,
+		"DateOfPurchase": "2024-10-20T00:00:00.000",
+		"PaymentMethod": "Credit Card",
+		"IsFirstPurchase": true
+	},
+	{
+		"CustomerID": "40ca44e9-cab9-41ec-bd2e-2398efa3c1cc",
+		"Name": "Krista Drake",
+		"Email": "mark07@yahoo.com",
+		"ProductCategory": "Groceries",
+		"AmountSpent": 120.83,
+		"DateOfPurchase": "2025-02-18T00:00:00.000",
+		"PaymentMethod": "PayPal",
+		"IsFirstPurchase": false
+	},
+	{
+		"CustomerID": "c31d950b-2deb-4193-b32b-984f3e1bf273",
+		"Name": "Joseph Simpson",
+		"Email": "sharpedwin@garcia.org",
+		"ProductCategory": "Sports",
+		"AmountSpent": 243.57,
+		"DateOfPurchase": "2025-03-05T00:00:00.000",
+		"PaymentMethod": "Gift Card",
+		"IsFirstPurchase": false
+	},
+	{
+		"CustomerID": "6cc7f03e-8af4-474f-978d-2a633097ce1d",
+		"Name": "Kimberly Sullivan",
+		"Email": "holmesaaron@gmail.com",
+		"ProductCategory": "Clothing",
+		"AmountSpent": 440.6,
+		"DateOfPurchase": "2025-01-21T00:00:00.000",
+		"PaymentMethod": "Credit Card",
+		"IsFirstPurchase": true
+	},
+	{
+		"CustomerID": "b1cad969-164f-49a6-82ad-8fac1a82e5b8",
+		"Name": "Ronald Blankenship",
+		"Email": "saraevans@hill.org",
+		"ProductCategory": "Toys",
+		"AmountSpent": 300.48,
+		"DateOfPurchase": "2025-02-03T00:00:00.000",
+		"PaymentMethod": "Gift Card",
+		"IsFirstPurchase": false
+	},
+	{
+		"CustomerID": "55f63482-d68a-4238-b263-70f06e7d4362",
+		"Name": "Lisa Lane",
+		"Email": "madisonfriedman@hill.info",
+		"ProductCategory": "Groceries",
+		"AmountSpent": 289.82,
+		"DateOfPurchase": "2025-03-31T00:00:00.000",
+		"PaymentMethod": "Gift Card",
+		"IsFirstPurchase": false
+	},
+	{
+		"CustomerID": "6103f6dc-403d-4177-8ffa-2c5d0bb45490",
+		"Name": "Amanda Randall",
+		"Email": "gjacobson@edwards.biz",
+		"ProductCategory": "Groceries",
+		"AmountSpent": 205.88,
+		"DateOfPurchase": "2024-08-20T00:00:00.000",
+		"PaymentMethod": "PayPal",
+		"IsFirstPurchase": false
+	},
+	{
+		"CustomerID": "3939ef30-efdd-4767-9a3f-e4d566fdd9e7",
+		"Name": "Timothy Lawrence",
+		"Email": "gfoster@hotmail.com",
+		"ProductCategory": "Books",
+		"AmountSpent": 466.5,
+		"DateOfPurchase": "2024-11-28T00:00:00.000",
+		"PaymentMethod": "PayPal",
+		"IsFirstPurchase": false
+	},
+	{
+		"CustomerID": "73cf8c26-0a8d-47a4-b6f7-aedc26e1e5fa",
+		"Name": "Isaac Jimenez",
+		"Email": "joseph13@yahoo.com",
+		"ProductCategory": "Toys",
+		"AmountSpent": 131.7,
+		"DateOfPurchase": "2024-06-19T00:00:00.000",
+		"PaymentMethod": "Credit Card",
+		"IsFirstPurchase": true
+	},
+	{
+		"CustomerID": "7312a65e-ec96-4853-b788-5fb7699ff7a5",
+		"Name": "Justin Robbins",
+		"Email": "suarezjennifer@moran.com",
+		"ProductCategory": "Sports",
+		"AmountSpent": 291.62,
+		"DateOfPurchase": "2024-09-20T00:00:00.000",
+		"PaymentMethod": "Credit Card",
+		"IsFirstPurchase": false
+	},
+	{
+		"CustomerID": "f308f00f-ba2c-43f1-9a31-7eb1246fa4e1",
+		"Name": "Tami Wilkerson",
+		"Email": "savannah90@yahoo.com",
+		"ProductCategory": "Clothing",
+		"AmountSpent": 22.71,
+		"DateOfPurchase": "2025-05-22T00:00:00.000",
+		"PaymentMethod": "PayPal",
+		"IsFirstPurchase": false
+	},
+	{
+		"CustomerID": "5c4a68a2-46f8-4505-ace9-05a4fc8de924",
+		"Name": "Paula Rodriguez",
+		"Email": "hermansteven@gmail.com",
+		"ProductCategory": "Home & Garden",
+		"AmountSpent": 347.8,
+		"DateOfPurchase": "2025-03-19T00:00:00.000",
+		"PaymentMethod": "Credit Card",
+		"IsFirstPurchase": true
+	},
+	{
+		"CustomerID": "c12a4116-47d6-4058-8e77-9fc5e764e514",
+		"Name": "Eddie Cole",
+		"Email": "nsmith@ramos.net",
+		"ProductCategory": "Sports",
+		"AmountSpent": 37.59,
+		"DateOfPurchase": "2024-09-20T00:00:00.000",
+		"PaymentMethod": "Debit Card",
+		"IsFirstPurchase": false
+	},
+	{
+		"CustomerID": "e4cc8f9c-437c-4c75-9583-ca7ebf4ee5e3",
+		"Name": "Steve Deleon",
+		"Email": "brianbest@hotmail.com",
+		"ProductCategory": "Sports",
+		"AmountSpent": 467.78,
+		"DateOfPurchase": "2024-09-25T00:00:00.000",
+		"PaymentMethod": "Credit Card",
+		"IsFirstPurchase": true
+	},
+	{
+		"CustomerID": "fa6824a4-ab21-414f-85dc-6fbe20b516af",
+		"Name": "Gary Hall DVM",
+		"Email": "hollypage@gmail.com",
+		"ProductCategory": "Sports",
+		"AmountSpent": 260.09,
+		"DateOfPurchase": "2024-07-03T00:00:00.000",
+		"PaymentMethod": "Debit Card",
+		"IsFirstPurchase": false
+	},
+	{
+		"CustomerID": "bf9d8cd6-1642-43b4-8496-6327323b35cc",
+		"Name": "Joel Walton",
+		"Email": "wleach@hotmail.com",
+		"ProductCategory": "Toys",
+		"AmountSpent": 497.5,
+		"DateOfPurchase": "2024-08-10T00:00:00.000",
+		"PaymentMethod": "Cash",
+		"IsFirstPurchase": false
+	},
+	{
+		"CustomerID": "959b6bdb-53db-40dd-b867-4e2edb31aed4",
+		"Name": "Donna Boyer",
+		"Email": "christinaboyd@yahoo.com",
+		"ProductCategory": "Electronics",
+		"AmountSpent": 383.5,
+		"DateOfPurchase": "2025-04-04T00:00:00.000",
+		"PaymentMethod": "Gift Card",
+		"IsFirstPurchase": true
+	},
+	{
+		"CustomerID": "176d034b-d2c1-4756-9417-7cfc41117d17",
+		"Name": "John Campbell",
+		"Email": "william23@gmail.com",
+		"ProductCategory": "Sports",
+		"AmountSpent": 318.03,
+		"DateOfPurchase": "2024-12-19T00:00:00.000",
+		"PaymentMethod": "Cash",
+		"IsFirstPurchase": false
+	},
+	{
+		"CustomerID": "8450a6a8-0f28-46c1-96f2-c6dae4ef0fd0",
+		"Name": "Carl Conner",
+		"Email": "flawson@guzman.com",
+		"ProductCategory": "Groceries",
+		"AmountSpent": 484.29,
+		"DateOfPurchase": "2024-12-08T00:00:00.000",
+		"PaymentMethod": "Credit Card",
+		"IsFirstPurchase": true
+	},
+	{
+		"CustomerID": "0463a6b4-46d0-4db2-96f0-b8d850f4b99f",
+		"Name": "Mary Goodwin",
+		"Email": "yrose@hotmail.com",
+		"ProductCategory": "Sports",
+		"AmountSpent": 400.11,
+		"DateOfPurchase": "2025-03-05T00:00:00.000",
+		"PaymentMethod": "Cash",
+		"IsFirstPurchase": false
+	},
+	{
+		"CustomerID": "b4e8cce5-ca7c-4748-9391-bdaa212a9174",
+		"Name": "Brenda Johnson",
+		"Email": "jamesgriffin@smith-davis.com",
+		"ProductCategory": "Sports",
+		"AmountSpent": 171.76,
+		"DateOfPurchase": "2024-10-16T00:00:00.000",
+		"PaymentMethod": "Credit Card",
+		"IsFirstPurchase": false
+	},
+	{
+		"CustomerID": "31ba6958-2dfa-4750-ba6f-5f0b89c555b7",
+		"Name": "Gary Perry",
+		"Email": "gcharles@hotmail.com",
+		"ProductCategory": "Toys",
+		"AmountSpent": 305.85,
+		"DateOfPurchase": "2025-04-25T00:00:00.000",
+		"PaymentMethod": "PayPal",
+		"IsFirstPurchase": false
+	},
+	{
+		"CustomerID": "515c2b87-ad52-4f42-9504-50fb40c57087",
+		"Name": "Christopher Adams",
+		"Email": "lisa66@yahoo.com",
+		"ProductCategory": "Books",
+		"AmountSpent": 116.2,
+		"DateOfPurchase": "2024-08-30T00:00:00.000",
+		"PaymentMethod": "Debit Card",
+		"IsFirstPurchase": true
+	},
+	{
+		"CustomerID": "fcb4eac3-d9e0-435d-8dbf-05b0d8eba821",
+		"Name": "Kimberly Garner",
+		"Email": "lorihopkins@gmail.com",
+		"ProductCategory": "Electronics",
+		"AmountSpent": 146.37,
+		"DateOfPurchase": "2024-11-05T00:00:00.000",
+		"PaymentMethod": "Gift Card",
+		"IsFirstPurchase": true
+	},
+	{
+		"CustomerID": "d0a7693c-e1ef-41ef-83b3-587802856a9c",
+		"Name": "Krystal Acosta",
+		"Email": "mjames@hotmail.com",
+		"ProductCategory": "Toys",
+		"AmountSpent": 13.42,
+		"DateOfPurchase": "2024-11-19T00:00:00.000",
+		"PaymentMethod": "Cash",
+		"IsFirstPurchase": false
+	},
+	{
+		"CustomerID": "066b901d-8be5-4e8d-a2f0-0e98e085b9d8",
+		"Name": "John Knapp",
+		"Email": "amber22@cook-guzman.com",
+		"ProductCategory": "Toys",
+		"AmountSpent": 141.13,
+		"DateOfPurchase": "2024-10-08T00:00:00.000",
+		"PaymentMethod": "Gift Card",
+		"IsFirstPurchase": true
+	},
+	{
+		"CustomerID": "108991bb-faa4-4f5a-bd8f-bed42d1dbded",
+		"Name": "Patricia Gibbs",
+		"Email": "davidsonashley@russell.com",
+		"ProductCategory": "Electronics",
+		"AmountSpent": 315.09,
+		"DateOfPurchase": "2024-08-07T00:00:00.000",
+		"PaymentMethod": "Credit Card",
+		"IsFirstPurchase": false
+	},
+	{
+		"CustomerID": "db84e5ee-b4a5-46a7-99e1-811003eefb22",
+		"Name": "Christopher Hogan",
+		"Email": "adavis@yahoo.com",
+		"ProductCategory": "Electronics",
+		"AmountSpent": 199.82,
+		"DateOfPurchase": "2024-09-03T00:00:00.000",
+		"PaymentMethod": "Gift Card",
+		"IsFirstPurchase": true
+	},
+	{
+		"CustomerID": "dd237621-340d-42ec-9df9-c6229257395d",
+		"Name": "Clayton Garrett",
+		"Email": "whitneywoodard@smith.com",
+		"ProductCategory": "Groceries",
+		"AmountSpent": 160.11,
+		"DateOfPurchase": "2025-02-20T00:00:00.000",
+		"PaymentMethod": "Credit Card",
+		"IsFirstPurchase": false
+	},
+	{
+		"CustomerID": "033cf0be-5666-45f4-9ba0-29f088c26fb8",
+		"Name": "Sarah Williams",
+		"Email": "glenda16@jones.com",
+		"ProductCategory": "Toys",
+		"AmountSpent": 367.84,
+		"DateOfPurchase": "2024-11-12T00:00:00.000",
+		"PaymentMethod": "Debit Card",
+		"IsFirstPurchase": true
+	},
+	{
+		"CustomerID": "22348a29-a7e4-4d0b-b817-02c665ad1b06",
+		"Name": "Carrie Anderson",
+		"Email": "kimberlywilliams@yahoo.com",
+		"ProductCategory": "Groceries",
+		"AmountSpent": 262.88,
+		"DateOfPurchase": "2024-10-14T00:00:00.000",
+		"PaymentMethod": "Cash",
+		"IsFirstPurchase": false
+	},
+	{
+		"CustomerID": "8b4c07e2-046a-4a9c-87b3-deaf3228cc5f",
+		"Name": "Patrick Quinn",
+		"Email": "boyersarah@yahoo.com",
+		"ProductCategory": "Clothing",
+		"AmountSpent": 493.91,
+		"DateOfPurchase": "2024-10-24T00:00:00.000",
+		"PaymentMethod": "Cash",
+		"IsFirstPurchase": true
+	},
+	{
+		"CustomerID": "3392d13b-e813-4b85-9276-3b57bafc737d",
+		"Name": "Tiffany Oconnor",
+		"Email": "janice44@thompson.com",
+		"ProductCategory": "Groceries",
+		"AmountSpent": 140.2,
+		"DateOfPurchase": "2024-12-17T00:00:00.000",
+		"PaymentMethod": "Debit Card",
+		"IsFirstPurchase": false
+	},
+	{
+		"CustomerID": "6f464c4d-972b-4943-bfad-84b7f43c41c6",
+		"Name": "Brandon Coleman",
+		"Email": "gibsonapril@yates-good.com",
+		"ProductCategory": "Electronics",
+		"AmountSpent": 382.59,
+		"DateOfPurchase": "2025-02-10T00:00:00.000",
+		"PaymentMethod": "Cash",
+		"IsFirstPurchase": false
+	},
+	{
+		"CustomerID": "af0c18b0-98e6-4a22-816e-fc86d6173a0e",
+		"Name": "Tammy Kelly",
+		"Email": "hollandcraig@hotmail.com",
+		"ProductCategory": "Books",
+		"AmountSpent": 205.12,
+		"DateOfPurchase": "2025-05-08T00:00:00.000",
+		"PaymentMethod": "Debit Card",
+		"IsFirstPurchase": true
+	},
+	{
+		"CustomerID": "f75c50c0-6a37-4139-bce9-06a5aacbb609",
+		"Name": "Kristin Wood",
+		"Email": "gabriella17@garcia-herman.org",
+		"ProductCategory": "Toys",
+		"AmountSpent": 419.06,
+		"DateOfPurchase": "2024-11-20T00:00:00.000",
+		"PaymentMethod": "Credit Card",
+		"IsFirstPurchase": false
+	},
+	{
+		"CustomerID": "0d6d0856-dc7c-45f1-b304-a404939e2689",
+		"Name": "Tamara Flores",
+		"Email": "lonniepalmer@miranda.info",
+		"ProductCategory": "Books",
+		"AmountSpent": 205.09,
+		"DateOfPurchase": "2024-06-20T00:00:00.000",
+		"PaymentMethod": "Cash",
+		"IsFirstPurchase": false
+	},
+	{
+		"CustomerID": "50fab805-f888-4922-97bd-97a0a4538772",
+		"Name": "Christopher Conner",
+		"Email": "ahaney@gmail.com",
+		"ProductCategory": "Clothing",
+		"AmountSpent": 457.99,
+		"DateOfPurchase": "2024-06-19T00:00:00.000",
+		"PaymentMethod": "PayPal",
+		"IsFirstPurchase": true
+	},
+	{
+		"CustomerID": "9eeb5637-e511-47fc-9bfb-1db352b4b911",
+		"Name": "Bobby Frazier",
+		"Email": "jeremycarter@yahoo.com",
+		"ProductCategory": "Books",
+		"AmountSpent": 381.97,
+		"DateOfPurchase": "2024-08-25T00:00:00.000",
+		"PaymentMethod": "Cash",
+		"IsFirstPurchase": true
+	},
+	{
+		"CustomerID": "cec86334-b326-466e-b21f-9917d2e35714",
+		"Name": "Emily Brown",
+		"Email": "davidlori@wilkerson.com",
+		"ProductCategory": "Home & Garden",
+		"AmountSpent": 242.01,
+		"DateOfPurchase": "2025-03-27T00:00:00.000",
+		"PaymentMethod": "Credit Card",
+		"IsFirstPurchase": false
+	},
+	{
+		"CustomerID": "d77d14d1-7ac0-4132-94a4-6e798b0fafcc",
+		"Name": "Kelli Day",
+		"Email": "xsmith@payne.biz",
+		"ProductCategory": "Sports",
+		"AmountSpent": 332.17,
+		"DateOfPurchase": "2024-07-30T00:00:00.000",
+		"PaymentMethod": "Credit Card",
+		"IsFirstPurchase": false
+	},
+	{
+		"CustomerID": "e6eaa730-49bb-40e4-850d-be640ff7e616",
+		"Name": "Matthew Waters",
+		"Email": "stacey76@davis.com",
+		"ProductCategory": "Sports",
+		"AmountSpent": 262.8,
+		"DateOfPurchase": "2025-02-20T00:00:00.000",
+		"PaymentMethod": "Gift Card",
+		"IsFirstPurchase": false
+	},
+	{
+		"CustomerID": "d5969e20-8fb1-4758-87c8-7e2f8a3a5c07",
+		"Name": "Benjamin Campbell",
+		"Email": "hayesjason@watson-hunter.org",
+		"ProductCategory": "Home & Garden",
+		"AmountSpent": 324.32,
+		"DateOfPurchase": "2024-07-02T00:00:00.000",
+		"PaymentMethod": "PayPal",
+		"IsFirstPurchase": false
+	},
+	{
+		"CustomerID": "d8398eb8-2ec7-486a-9a0f-457d34f4c224",
+		"Name": "Paul Smith",
+		"Email": "alansmith@gmail.com",
+		"ProductCategory": "Clothing",
+		"AmountSpent": 155.42,
+		"DateOfPurchase": "2025-03-06T00:00:00.000",
+		"PaymentMethod": "Gift Card",
+		"IsFirstPurchase": false
+	},
+	{
+		"CustomerID": "a3f8e761-2788-406e-be4a-6d3bf7b767a5",
+		"Name": "Jennifer Hudson",
+		"Email": "baileyjones@yahoo.com",
+		"ProductCategory": "Clothing",
+		"AmountSpent": 234.47,
+		"DateOfPurchase": "2024-08-27T00:00:00.000",
+		"PaymentMethod": "Gift Card",
+		"IsFirstPurchase": true
+	},
+	{
+		"CustomerID": "7044b035-410a-4165-9306-05d418248a59",
+		"Name": "Stephanie Smith",
+		"Email": "amandaturner@gmail.com",
+		"ProductCategory": "Groceries",
+		"AmountSpent": 211.82,
+		"DateOfPurchase": "2025-05-16T00:00:00.000",
+		"PaymentMethod": "Debit Card",
+		"IsFirstPurchase": false
+	},
+	{
+		"CustomerID": "7de306ca-92fc-4d59-b7ed-cec1ba713ed8",
+		"Name": "Sarah Suarez",
+		"Email": "bonnie37@yahoo.com",
+		"ProductCategory": "Clothing",
+		"AmountSpent": 66.52,
+		"DateOfPurchase": "2024-07-11T00:00:00.000",
+		"PaymentMethod": "PayPal",
+		"IsFirstPurchase": false
+	},
+	{
+		"CustomerID": "bd7d99f9-4f63-4a8d-93dd-eb4df47f8150",
+		"Name": "Deborah Reynolds",
+		"Email": "qvilla@gmail.com",
+		"ProductCategory": "Toys",
+		"AmountSpent": 217.68,
+		"DateOfPurchase": "2024-06-17T00:00:00.000",
+		"PaymentMethod": "Gift Card",
+		"IsFirstPurchase": false
+	},
+	{
+		"CustomerID": "ddc120f6-2c50-44f8-8648-57dd27cb2e31",
+		"Name": "Robert Phillips",
+		"Email": "davisrobert@hotmail.com",
+		"ProductCategory": "Home & Garden",
+		"AmountSpent": 137.78,
+		"DateOfPurchase": "2025-02-04T00:00:00.000",
+		"PaymentMethod": "Gift Card",
+		"IsFirstPurchase": true
+	},
+	{
+		"CustomerID": "b8e4c8db-42ac-441b-a332-aff9a9dd0352",
+		"Name": "Jeanette Edwards",
+		"Email": "danielsantos@yahoo.com",
+		"ProductCategory": "Groceries",
+		"AmountSpent": 85.83,
+		"DateOfPurchase": "2024-06-30T00:00:00.000",
+		"PaymentMethod": "Credit Card",
+		"IsFirstPurchase": true
+	},
+	{
+		"CustomerID": "185bc546-df10-465e-902c-c41804ae8fc4",
+		"Name": "Darlene Buchanan",
+		"Email": "uedwards@yahoo.com",
+		"ProductCategory": "Electronics",
+		"AmountSpent": 452.05,
+		"DateOfPurchase": "2024-10-17T00:00:00.000",
+		"PaymentMethod": "Credit Card",
+		"IsFirstPurchase": false
+	},
+	{
+		"CustomerID": "a8225797-847f-48b2-be88-48b603150be3",
+		"Name": "Amanda Roman",
+		"Email": "thompsondeanna@meyers.com",
+		"ProductCategory": "Toys",
+		"AmountSpent": 229.39,
+		"DateOfPurchase": "2024-09-28T00:00:00.000",
+		"PaymentMethod": "Cash",
+		"IsFirstPurchase": false
+	},
+	{
+		"CustomerID": "a658aebc-9d5e-4447-8554-5b0160e13c29",
+		"Name": "Eric Haney",
+		"Email": "lisacarlson@hotmail.com",
+		"ProductCategory": "Groceries",
+		"AmountSpent": 18.2,
+		"DateOfPurchase": "2024-08-28T00:00:00.000",
+		"PaymentMethod": "PayPal",
+		"IsFirstPurchase": true
+	},
+	{
+		"CustomerID": "7d4cdec6-8537-40c9-a21c-9a83cefcb7cf",
+		"Name": "Matthew Stuart",
+		"Email": "katherinepowell@hotmail.com",
+		"ProductCategory": "Sports",
+		"AmountSpent": 112.66,
+		"DateOfPurchase": "2024-08-17T00:00:00.000",
+		"PaymentMethod": "Debit Card",
+		"IsFirstPurchase": false
+	},
+	{
+		"CustomerID": "45587ba1-1785-4deb-ad9f-d0bec493fbbc",
+		"Name": "Maria Mccann",
+		"Email": "sharon13@mcdonald-rivera.com",
+		"ProductCategory": "Groceries",
+		"AmountSpent": 398.42,
+		"DateOfPurchase": "2024-07-27T00:00:00.000",
+		"PaymentMethod": "Debit Card",
+		"IsFirstPurchase": false
+	},
+	{
+		"CustomerID": "138be3d1-e1ca-4a4b-bb42-ea02f8e71f92",
+		"Name": "Kristin Berry",
+		"Email": "wardpatrick@cooper.biz",
+		"ProductCategory": "Groceries",
+		"AmountSpent": 27.88,
+		"DateOfPurchase": "2024-09-26T00:00:00.000",
+		"PaymentMethod": "Credit Card",
+		"IsFirstPurchase": false
+	},
+	{
+		"CustomerID": "222646a6-b2f2-4a7a-bdcd-c747ec12b941",
+		"Name": "Victor Ruiz",
+		"Email": "hollystokes@mcmillan-walsh.org",
+		"ProductCategory": "Sports",
+		"AmountSpent": 119.04,
+		"DateOfPurchase": "2024-12-11T00:00:00.000",
+		"PaymentMethod": "Credit Card",
+		"IsFirstPurchase": true
+	},
+	{
+		"CustomerID": "049c0f53-61bc-41be-ad98-55d49ab7fa94",
+		"Name": "Michelle Bass",
+		"Email": "boyerholly@hotmail.com",
+		"ProductCategory": "Sports",
+		"AmountSpent": 132.31,
+		"DateOfPurchase": "2025-02-26T00:00:00.000",
+		"PaymentMethod": "Gift Card",
+		"IsFirstPurchase": true
+	},
+	{
+		"CustomerID": "8087b716-355f-4a59-82d4-72bd8f81094f",
+		"Name": "Thomas Allen",
+		"Email": "vadams@yahoo.com",
+		"ProductCategory": "Home & Garden",
+		"AmountSpent": 50.42,
+		"DateOfPurchase": "2025-03-23T00:00:00.000",
+		"PaymentMethod": "Credit Card",
+		"IsFirstPurchase": false
+	},
+	{
+		"CustomerID": "7e43d0ae-8f38-4342-82dd-72ba83f46545",
+		"Name": "Lori Conley",
+		"Email": "adam61@gmail.com",
+		"ProductCategory": "Groceries",
+		"AmountSpent": 477.55,
+		"DateOfPurchase": "2024-11-24T00:00:00.000",
+		"PaymentMethod": "PayPal",
+		"IsFirstPurchase": true
+	},
+	{
+		"CustomerID": "55971667-c0ea-4c1b-9dde-23878c8c922d",
+		"Name": "Erin Jones",
+		"Email": "bradley50@miles.com",
+		"ProductCategory": "Home & Garden",
+		"AmountSpent": 47.31,
+		"DateOfPurchase": "2024-06-27T00:00:00.000",
+		"PaymentMethod": "Debit Card",
+		"IsFirstPurchase": false
+	},
+	{
+		"CustomerID": "6cd38974-c916-42f7-b12d-b97d6d721662",
+		"Name": "Zachary Christensen",
+		"Email": "samantha61@gmail.com",
+		"ProductCategory": "Toys",
+		"AmountSpent": 269.9,
+		"DateOfPurchase": "2025-04-19T00:00:00.000",
+		"PaymentMethod": "Gift Card",
+		"IsFirstPurchase": true
+	},
+	{
+		"CustomerID": "1c612d0c-0828-48db-b97e-b4b9f116e8ea",
+		"Name": "Brian Jones",
+		"Email": "rwilson@king.biz",
+		"ProductCategory": "Clothing",
+		"AmountSpent": 139.92,
+		"DateOfPurchase": "2025-05-14T00:00:00.000",
+		"PaymentMethod": "Gift Card",
+		"IsFirstPurchase": true
+	},
+	{
+		"CustomerID": "555d204c-957f-4dad-9978-c7d78fee99d2",
+		"Name": "Cindy Copeland",
+		"Email": "leonardortega@swanson.com",
+		"ProductCategory": "Toys",
+		"AmountSpent": 69.82,
+		"DateOfPurchase": "2024-12-26T00:00:00.000",
+		"PaymentMethod": "Cash",
+		"IsFirstPurchase": false
+	},
+	{
+		"CustomerID": "4a7ee1bc-dec3-4ef1-9324-202f65b5e8bc",
+		"Name": "Isabel Hall",
+		"Email": "ashleybaxter@melton.com",
+		"ProductCategory": "Electronics",
+		"AmountSpent": 254.58,
+		"DateOfPurchase": "2024-12-22T00:00:00.000",
+		"PaymentMethod": "Credit Card",
+		"IsFirstPurchase": false
+	},
+	{
+		"CustomerID": "35061d7b-934d-4683-beab-c1e25b0a97fb",
+		"Name": "Jesse Stephens",
+		"Email": "yvettemiller@gmail.com",
+		"ProductCategory": "Books",
+		"AmountSpent": 9.03,
+		"DateOfPurchase": "2025-01-27T00:00:00.000",
+		"PaymentMethod": "Credit Card",
+		"IsFirstPurchase": false
+	},
+	{
+		"CustomerID": "357c00a4-ef37-4606-8035-edcec951fe52",
+		"Name": "Brian Lee",
+		"Email": "tiffany23@wilkinson-meyer.info",
+		"ProductCategory": "Electronics",
+		"AmountSpent": 285.13,
+		"DateOfPurchase": "2024-12-24T00:00:00.000",
+		"PaymentMethod": "PayPal",
+		"IsFirstPurchase": true
+	},
+	{
+		"CustomerID": "f647e70b-d4f6-4b0b-b89d-b0ca81f06fae",
+		"Name": "Kurt Jackson",
+		"Email": "desireebass@hotmail.com",
+		"ProductCategory": "Home & Garden",
+		"AmountSpent": 296.75,
+		"DateOfPurchase": "2024-08-27T00:00:00.000",
+		"PaymentMethod": "Credit Card",
+		"IsFirstPurchase": true
+	},
+	{
+		"CustomerID": "d3428c9b-becc-48cb-965a-c37f44e67025",
+		"Name": "Elizabeth Peterson",
+		"Email": "stevebradley@yahoo.com",
+		"ProductCategory": "Electronics",
+		"AmountSpent": 95.07,
+		"DateOfPurchase": "2024-10-11T00:00:00.000",
+		"PaymentMethod": "Credit Card",
+		"IsFirstPurchase": true
+	},
+	{
+		"CustomerID": "5df01cc2-6745-4942-9b88-ecb9afa6f88a",
+		"Name": "Jamie Rogers",
+		"Email": "owu@strong.com",
+		"ProductCategory": "Books",
+		"AmountSpent": 460.31,
+		"DateOfPurchase": "2025-01-23T00:00:00.000",
+		"PaymentMethod": "PayPal",
+		"IsFirstPurchase": true
+	},
+	{
+		"CustomerID": "8f9bb9d9-054d-4b03-8a8f-49fd6ed4e38b",
+		"Name": "Sandra Mcconnell DVM",
+		"Email": "robertjames@marshall.info",
+		"ProductCategory": "Books",
+		"AmountSpent": 35.67,
+		"DateOfPurchase": "2024-11-19T00:00:00.000",
+		"PaymentMethod": "PayPal",
+		"IsFirstPurchase": false
+	},
+	{
+		"CustomerID": "3483a090-88a8-478b-b92f-cf18b9fcfcbc",
+		"Name": "Nathaniel Russell",
+		"Email": "kathy30@hotmail.com",
+		"ProductCategory": "Sports",
+		"AmountSpent": 484.77,
+		"DateOfPurchase": "2025-03-12T00:00:00.000",
+		"PaymentMethod": "Cash",
+		"IsFirstPurchase": false
+	},
+	{
+		"CustomerID": "b0554874-bf8b-4358-8c05-336cda915065",
+		"Name": "Robert Tucker",
+		"Email": "hhernandez@gmail.com",
+		"ProductCategory": "Clothing",
+		"AmountSpent": 141.9,
+		"DateOfPurchase": "2024-07-22T00:00:00.000",
+		"PaymentMethod": "Cash",
+		"IsFirstPurchase": true
+	},
+	{
+		"CustomerID": "e9fcc1b9-abb1-4df5-bcd0-e2824a141ca5",
+		"Name": "Nicholas Kelly",
+		"Email": "william74@gmail.com",
+		"ProductCategory": "Toys",
+		"AmountSpent": 318.39,
+		"DateOfPurchase": "2024-07-07T00:00:00.000",
+		"PaymentMethod": "Cash",
+		"IsFirstPurchase": false
+	},
+	{
+		"CustomerID": "6c7012dc-6ef7-4e01-8664-94f898e74223",
+		"Name": "Jennifer Gibson",
+		"Email": "summersjames@gmail.com",
+		"ProductCategory": "Sports",
+		"AmountSpent": 116.08,
+		"DateOfPurchase": "2024-07-29T00:00:00.000",
+		"PaymentMethod": "Gift Card",
+		"IsFirstPurchase": false
+	},
+	{
+		"CustomerID": "e4b41f2e-4bde-4f17-860b-2e8e4658f2d3",
+		"Name": "Luis Arias",
+		"Email": "peggyeverett@gmail.com",
+		"ProductCategory": "Groceries",
+		"AmountSpent": 83.56,
+		"DateOfPurchase": "2025-02-03T00:00:00.000",
+		"PaymentMethod": "PayPal",
+		"IsFirstPurchase": false
+	},
+	{
+		"CustomerID": "33a72053-03db-4e24-8627-13bf2c649b19",
+		"Name": "Vanessa Patterson",
+		"Email": "donaldmarks@hotmail.com",
+		"ProductCategory": "Toys",
+		"AmountSpent": 357.32,
+		"DateOfPurchase": "2024-12-15T00:00:00.000",
+		"PaymentMethod": "Cash",
+		"IsFirstPurchase": false
+	},
+	{
+		"CustomerID": "38810405-f298-4936-a7ec-8f1123d6ee58",
+		"Name": "Jason Davis",
+		"Email": "ronald80@yahoo.com",
+		"ProductCategory": "Electronics",
+		"AmountSpent": 401.54,
+		"DateOfPurchase": "2025-04-12T00:00:00.000",
+		"PaymentMethod": "Cash",
+		"IsFirstPurchase": false
+	},
+	{
+		"CustomerID": "d69c965e-9a73-4233-814b-f6371a6623b5",
+		"Name": "Kathryn Cole",
+		"Email": "jessicanguyen@wu.com",
+		"ProductCategory": "Toys",
+		"AmountSpent": 66.04,
+		"DateOfPurchase": "2024-10-09T00:00:00.000",
+		"PaymentMethod": "Gift Card",
+		"IsFirstPurchase": false
+	},
+	{
+		"CustomerID": "ed15695b-ddcf-48e2-aebb-d68718f9176e",
+		"Name": "Joshua Jackson",
+		"Email": "chase24@warren.net",
+		"ProductCategory": "Books",
+		"AmountSpent": 334.72,
+		"DateOfPurchase": "2024-11-03T00:00:00.000",
+		"PaymentMethod": "Credit Card",
+		"IsFirstPurchase": false
+	},
+	{
+		"CustomerID": "a42cffea-407a-47cc-af35-b90a7af02c08",
+		"Name": "Madison Conrad",
+		"Email": "stephen61@adkins-smith.com",
+		"ProductCategory": "Home & Garden",
+		"AmountSpent": 106.12,
+		"DateOfPurchase": "2024-07-04T00:00:00.000",
+		"PaymentMethod": "Cash",
+		"IsFirstPurchase": true
+	},
+	{
+		"CustomerID": "424eec9c-5c99-4b0c-81cd-b107b1a88714",
+		"Name": "Michelle Robinson",
+		"Email": "hansenrobert@rodriguez.com",
+		"ProductCategory": "Books",
+		"AmountSpent": 214.7,
+		"DateOfPurchase": "2024-07-29T00:00:00.000",
+		"PaymentMethod": "Credit Card",
+		"IsFirstPurchase": true
+	},
+	{
+		"CustomerID": "3da45cb2-2b8b-43ec-938c-1e143df6d715",
+		"Name": "Patricia Robinson",
+		"Email": "sharrison@meyers.org",
+		"ProductCategory": "Sports",
+		"AmountSpent": 356.83,
+		"DateOfPurchase": "2025-02-08T00:00:00.000",
+		"PaymentMethod": "Debit Card",
+		"IsFirstPurchase": false
+	}
+]
