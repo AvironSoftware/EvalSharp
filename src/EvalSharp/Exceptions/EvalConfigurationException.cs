@@ -1,4 +1,4 @@
-namespace EvalSharp;
+namespace EvalSharp.Exceptions;
 
 /// <summary>
 /// An exception that is thrown when there is a configuration error in EvalSharp.

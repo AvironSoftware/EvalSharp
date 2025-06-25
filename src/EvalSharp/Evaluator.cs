@@ -7,6 +7,7 @@ using System.Text.Json;
 using EvalSharp.Helpers;
 using EvalSharp.Models.Enums;
 using EvalSharp.Scoring;
+using EvalSharp.Exceptions;
 
 namespace EvalSharp;
 
