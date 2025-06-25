@@ -59,10 +59,13 @@ public class EvalResultPrinter
             sb.AppendLine($"  - context: {context}");
             sb.AppendLine($"  - retrieval context: {retrievalContext}");
         }
+        var report = sb.ToString();
+        report = report.Replace("{", "{{").Replace("}", "}}");
 
         PrintTabulated();
         PrintOverallTabulated();
-        AnsiConsole.Write(sb.ToString());
+        
+        AnsiConsole.Write(report);
     }
 
     /// <summary>
