@@ -60,6 +60,62 @@ var result = await evaluator.RunAsync();
 
 ---
 
+## ✅ Unit Testing with EvalTest.AssertAsync
+
+In addition to evaluating datasets with the `Evaluator`, EvalSharp makes it easy to include LLM evaluation in your unit tests. The `EvalTest.AssertAsync` method allows you to assert results for a single test with one or more metrics.
+
+### Example: Asserting Multiple Metrics in a Unit Test
+
+```csharp
+using EvalSharp.Models;
+using EvalSharp.Scoring;
+using Xunit.Abstractions;
+
+public class MyEvalTests
+{
+    public MyEvalTests(ITestOutputHelper testOutputHelper)
+    {
+        _testOutputHelper = testOutputHelper;
+    }
+
+    [Fact]
+    public async Task SingleTest_MultipleMetrics()
+    {
+        var testData = new EvaluatorTestData
+        {
+            InitialInput = "Summarize the meeting.",
+            ActualOutput = "The meeting summary is provided below...",
+        };
+
+        var rel_config = new AnswerRelevancyMetricConfiguration
+        {
+            IncludeReason = true,
+            Threshold = 0.9
+        };
+
+        var geval_config = new GEvalMetricConfiguration
+        {
+            Threshold = 0.5,
+            Criteria = "Does the output correctly explain concepts, events, or processes based on the input prompt?"
+        };
+
+        var metrics = new List<Metric>
+        {
+            new AnswerRelevancyMetric(ChatClient.GetInstance(), rel_config),
+            new GEvalMetric(ChatClient.GetInstance(), geval_config)
+        };
+
+        await EvalTest.AssertAsync(testData, metrics, _testOutputHelper.WriteLine);
+    }
+}
+```
+
+✅ Supports multiple metrics in a single call  
+✅ Output results to your preferred sink (e.g., Console, Xunit test output)  
+✅ Ideal for lightweight, targeted LLM evaluation in CI/CD pipelines
+
+---
+
 ## 🛠 Metrics Included
 
 ✅ **[Answer Relevancy](/src/EvalSharp/Scoring/AnswerRelevancy/README.md)** — Is the LLM's response relevant to the input?  
