@@ -5,7 +5,7 @@ namespace EvalSharp.Scoring;
 /// <summary>
 /// Configuration for the Tool Correctness Metric.
 /// </summary>
-public class ToolCorrectnessMetricConfiguration : MetricConfiguration
+public record ToolCorrectnessMetricConfiguration : MetricConfiguration
 {
     /// <summary>
     /// A boolean that indicates if order should be considered apart of the metric score. Default is False.

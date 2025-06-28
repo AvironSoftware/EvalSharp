@@ -6,25 +6,19 @@ using EvalSharp.Scoring.AnswerRelevancy;
 
 namespace EvalSharp.Scoring;
 
-
 /// <summary>
 /// Represents a metric for evaluating the relevancy of an answer based on the provided test data.
 /// </summary>
-public class AnswerRelevancyMetric : Metric<AnswerRelevancyMetricConfiguration>, IChatClientMetric
+public class AnswerRelevancyMetric : LLMAsAJudgeMetric<AnswerRelevancyMetricConfiguration>, IChatClientMetric
 {
-    /// <summary>
-    /// Gets the chat client used for interacting with the LLM.
-    /// </summary>
-    public IChatClient ChatClient { get; }
-
     /// <summary>
     /// Initializes a new instance of the <see cref="AnswerRelevancyMetric"/> class.
     /// </summary>
     /// <param name="chatClient">The chat client used for LLM interactions.</param>
     /// <param name="configuration">The configuration for the metric.</param>
-    public AnswerRelevancyMetric(IChatClient chatClient, AnswerRelevancyMetricConfiguration configuration) : base(configuration)
+    public AnswerRelevancyMetric(IChatClient chatClient, AnswerRelevancyMetricConfiguration configuration) 
+        : base(configuration, chatClient)
     {
-        ChatClient = chatClient;
     }
 
     /// <summary>
@@ -49,13 +43,13 @@ public class AnswerRelevancyMetric : Metric<AnswerRelevancyMetricConfiguration>,
 
         // Step 1: Generate statements from the actual output
         string statementsPrompt = AnswerRelevancyTemplate.GenerateStatements(actualOutput);
-        var statementsResponse = await ChatClient.GetStructuredResponseFromLLM<StatementsResponse>(statementsPrompt);
+        var statementsResponse = await GetStructuredResponseFromLLM<StatementsResponse>(statementsPrompt);
         List<string> statements = statementsResponse?.Statements ?? new List<string>();
 
         // Step 2: Generate verdicts using the input and the generated statements
         string statementsJson = JsonSerializer.Serialize(statements);
         string verdictsPrompt = AnswerRelevancyTemplate.GenerateVerdicts(input, statementsJson);
-        var verdictsResponse = await ChatClient.GetStructuredResponseFromLLM<VerdictsModel>(verdictsPrompt);
+        var verdictsResponse = await GetStructuredResponseFromLLM<VerdictsModel>(verdictsPrompt);
         VerdictModel[] verdicts = verdictsResponse?.Verdicts ?? [];
 
         // Step 3: Calculate the relevancy score
@@ -67,7 +61,7 @@ public class AnswerRelevancyMetric : Metric<AnswerRelevancyMetricConfiguration>,
         else
         {
             score = verdicts.ScoreYesIdk();
-            if (Configuration.StrictMode && score < Configuration.Threshold)
+            if (Configuration.StrictMode == true && score < Configuration.Threshold)
             {
                 score = 0;
             }
@@ -79,7 +73,7 @@ public class AnswerRelevancyMetric : Metric<AnswerRelevancyMetricConfiguration>,
         {
             var irrelevantReasons = verdicts.GetReasons(VerdictEnum.No);
             string reasonPrompt = AnswerRelevancyTemplate.GenerateReason(irrelevantReasons, input, score.ToString("F2"));
-            var reasonResponse = await ChatClient.GetStructuredResponseFromLLM<ReasonResponse>(reasonPrompt);
+            var reasonResponse = await GetStructuredResponseFromLLM<ReasonResponse>(reasonPrompt);
             reason = reasonResponse.Reason;
         }
 

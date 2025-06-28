@@ -13,22 +13,16 @@ namespace EvalSharp.Scoring;
 /// This metric calculates the precision of retrieved items in the context of a given input and expected output.
 /// It uses a chat client to interact with an AI model for generating verdicts and reasoning.
 /// </remarks>
-public class ContextualPrecisionMetric : Metric<ContextualPrecisionMetricConfiguration>, IChatClientMetric
+public class ContextualPrecisionMetric : LLMAsAJudgeMetric<ContextualPrecisionMetricConfiguration>, IChatClientMetric
 {
-    /// <summary>
-    /// Gets the chat client used for interacting with the AI model.
-    /// </summary>
-    public IChatClient ChatClient { get; }
-
     /// <summary>
     /// Initializes a new instance of the <see cref="ContextualPrecisionMetric"/> class.
     /// </summary>
     /// <param name="chatClient">The chat client used for AI interactions.</param>
     /// <param name="configuration">The configuration for the metric.</param>
     public ContextualPrecisionMetric(IChatClient chatClient, ContextualPrecisionMetricConfiguration configuration)
-        : base(configuration)
+        : base(configuration, chatClient)
     {
-        ChatClient = chatClient;
     }
 
     /// <summary>
@@ -60,12 +54,11 @@ public class ContextualPrecisionMetric : Metric<ContextualPrecisionMetricConfigu
         
         // Step 1: Generate verdicts using the input, expected output, and retrieval context
         string verdictsPrompt = ContextualPrecisionTemplate.GenerateVerdicts(input, expectedOutput, retrievalContext);
-        var verdictsResponse =
-            await ChatClient.GetStructuredResponseFromLLM<VerdictsModel>(verdictsPrompt);
+        var verdictsResponse = await GetStructuredResponseFromLLM<VerdictsModel>(verdictsPrompt);
         VerdictModel[] verdicts = verdictsResponse?.Verdicts ?? [];
         // Step 2: Calculate the contextual precision score
         double score = CalculateScore(verdicts);
-        if (Configuration.StrictMode && score < Configuration.Threshold)
+        if (Configuration.StrictMode == true && score < Configuration.Threshold)
         {
             score = 0;
         }
@@ -77,8 +70,7 @@ public class ContextualPrecisionMetric : Metric<ContextualPrecisionMetricConfigu
             // Serialize verdicts to JSON (for inclusion in the prompt)
             string verdictsJson = JsonSerializer.Serialize(verdicts);
             string reasonPrompt = ContextualPrecisionTemplate.GenerateReason(input, verdictsJson, score.ToString("F2"));
-            var reasonResponse =
-                await ChatClient.GetStructuredResponseFromLLM<ReasonResponse>(reasonPrompt);
+            var reasonResponse = await GetStructuredResponseFromLLM<ReasonResponse>(reasonPrompt);
             reason = reasonResponse?.Reason;
         }
 

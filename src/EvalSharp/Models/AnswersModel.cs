@@ -1,5 +1,4 @@
 ﻿using System.Text.Json.Serialization;
-using EvalSharp.Models.Enums;
 
 namespace EvalSharp.Models;
 

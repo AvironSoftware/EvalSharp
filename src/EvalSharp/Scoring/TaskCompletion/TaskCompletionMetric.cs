@@ -6,21 +6,15 @@ namespace EvalSharp.Scoring;
 /// <summary>
 /// Represents a metric for evaluating task completion based on user goals and task outcomes.
 /// </summary>
-public class TaskCompletionMetric : Metric<TaskCompletionMetricConfiguration>, IChatClientMetric
+public class TaskCompletionMetric : LLMAsAJudgeMetric<TaskCompletionMetricConfiguration>, IChatClientMetric
 {
-    /// <summary>
-    /// Gets the chat client used for interacting with the language model.
-    /// </summary>
-    public IChatClient ChatClient { get; }
-
     /// <summary>
     /// Initializes a new instance of the <see cref="TaskCompletionMetric"/> class.
     /// </summary>
     /// <param name="chatClient">The chat client used for language model interactions.</param>
     /// <param name="configuration">The configuration for the task completion metric.</param>
-    public TaskCompletionMetric(IChatClient chatClient, TaskCompletionMetricConfiguration configuration) : base(configuration)
+    public TaskCompletionMetric(IChatClient chatClient, TaskCompletionMetricConfiguration configuration) : base(configuration, chatClient)
     {
-        ChatClient = chatClient;
     }
 
     /// <summary>
@@ -78,7 +72,7 @@ public class TaskCompletionMetric : Metric<TaskCompletionMetricConfiguration>, I
             context.ToolsCalled!
         );
 
-        var response = await ChatClient.GetStructuredResponseFromLLM<GoalAndOutcome>(prompt);
+        var response = await GetStructuredResponseFromLLM<GoalAndOutcome>(prompt);
         return (response.UserGoal, response.TaskOutcome);
     }
 
@@ -93,7 +87,7 @@ public class TaskCompletionMetric : Metric<TaskCompletionMetricConfiguration>, I
     {
         string prompt = TaskCompletionTemplate.GenerateVerdict(userGoal, taskOutcome);
 
-        var response = await ChatClient.GetStructuredResponseFromLLM<ScoredVerdictModel>(prompt);
+        var response = await GetStructuredResponseFromLLM<ScoredVerdictModel>(prompt);
         return (response.Verdict, response.Reason);
     }
 
@@ -104,6 +98,6 @@ public class TaskCompletionMetric : Metric<TaskCompletionMetricConfiguration>, I
     /// <returns>The calculated score.</returns>
     private double CalculateScore(double verdict)
     {
-        return Configuration.StrictMode && verdict < Configuration.Threshold ? 0 : verdict;
+        return Configuration.StrictMode == true && verdict < Configuration.Threshold ? 0 : verdict;
     }
 }

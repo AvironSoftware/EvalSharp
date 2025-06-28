@@ -1,6 +1,4 @@
-﻿using EvalSharp;
-
-namespace EvalSharp.Scoring.Faithfulness;
+﻿namespace EvalSharp.Scoring.Faithfulness;
 internal static class FaithfulnessTemplate
 {
     //Prompt adapted from deepeval, licensed under Apache 2.0

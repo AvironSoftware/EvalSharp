@@ -25,7 +25,7 @@ public class EvaluatorTestData
     /// <summary>
     /// A list of background information strings that your app actually found when answering. 
     /// Use this to compare what was retrieved against the ideal <see cref="Context"/>.
-    /// </summary> 
+    /// </summary>
     public List<string>? RetrievalContext { get; set; }
 
     /// <summary>

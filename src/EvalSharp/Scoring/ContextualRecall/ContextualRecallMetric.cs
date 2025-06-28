@@ -8,21 +8,15 @@ namespace EvalSharp.Scoring;
 /// <summary>
 /// Represents a metric for evaluating contextual recall in a chat-based system.
 /// </summary>
-public class ContextualRecallMetric : Metric<ContextualRecallMetricConfiguration>, IChatClientMetric
+public class ContextualRecallMetric : LLMAsAJudgeMetric<ContextualRecallMetricConfiguration>, IChatClientMetric
 {
-    /// <summary>
-    /// Gets the chat client used for interacting with the LLM.
-    /// </summary>
-    public IChatClient ChatClient { get; }
-
     /// <summary>
     /// Initializes a new instance of the <see cref="ContextualRecallMetric"/> class.
     /// </summary>
     /// <param name="chatClient">The chat client used for LLM interactions.</param>
     /// <param name="configuration">The configuration for the metric.</param>
-    public ContextualRecallMetric(IChatClient chatClient, ContextualRecallMetricConfiguration configuration) : base(configuration)
+    public ContextualRecallMetric(IChatClient chatClient, ContextualRecallMetricConfiguration configuration) : base(configuration, chatClient)
     {
-        ChatClient = chatClient;
     }
 
     /// <summary>
@@ -46,7 +40,7 @@ public class ContextualRecallMetric : Metric<ContextualRecallMetricConfiguration
         var verdictsPrompt = ContextualRecallTemplate.GenerateVerdicts(testData.ExpectedOutput, testData.RetrievalContext);
 
         // 2. Get verdicts from LLM
-        var verdicts = await ChatClient.GetStructuredResponseFromLLM<VerdictsModel>(verdictsPrompt);
+        var verdicts = await GetStructuredResponseFromLLM<VerdictsModel>(verdictsPrompt);
 
         // 3. Calculate score based on verdicts
         double score = verdicts.Verdicts.ScoreYes();
@@ -55,7 +49,7 @@ public class ContextualRecallMetric : Metric<ContextualRecallMetricConfiguration
         string reason = await GenerateReason(testData.ExpectedOutput!, verdicts.Verdicts, score);
 
         // 5. Apply strict mode if enabled
-        if (Configuration.StrictMode && score < 1.0)
+        if (Configuration.StrictMode == true && score < 1.0)
         {
             score = 0.0;
         }
@@ -83,7 +77,7 @@ public class ContextualRecallMetric : Metric<ContextualRecallMetricConfiguration
     {
         var reasonPrompt = ContextualRecallTemplate.GenerateReason(expectedOutput, verdicts, score);
 
-        var reasonResponse = await ChatClient.GetStructuredResponseFromLLM<ReasonResponse>(reasonPrompt);
+        var reasonResponse = await GetStructuredResponseFromLLM<ReasonResponse>(reasonPrompt);
         return reasonResponse.Reason;
     }
 } 

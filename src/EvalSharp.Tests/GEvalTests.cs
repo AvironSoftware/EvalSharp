@@ -1,6 +1,5 @@
 using EvalSharp.Scoring;
 using Xunit.Abstractions;
-using Xunit.Sdk;
 
 namespace EvalSharp.Tests;
 

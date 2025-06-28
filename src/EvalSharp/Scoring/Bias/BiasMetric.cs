@@ -8,21 +8,15 @@ namespace EvalSharp.Scoring;
 /// <summary>
 /// Represents a metric for evaluating bias in the output of an evaluator test.
 /// </summary>
-public class BiasMetric : Metric<BiasMetricConfiguration>, IChatClientMetric
+public class BiasMetric : LLMAsAJudgeMetric<BiasMetricConfiguration>, IChatClientMetric
 {
-    /// <summary>
-    /// Gets the chat client used for interacting with the language model.
-    /// </summary>
-    public IChatClient ChatClient { get; }
-
     /// <summary>
     /// Initializes a new instance of the <see cref="BiasMetric"/> class.
     /// </summary>
     /// <param name="chatClient">The chat client used for language model interactions.</param>
     /// <param name="configuration">The configuration for the bias metric.</param>
-    public BiasMetric(IChatClient chatClient, BiasMetricConfiguration configuration) : base(configuration)
+    public BiasMetric(IChatClient chatClient, BiasMetricConfiguration configuration) : base(configuration, chatClient)
     {
-        ChatClient = chatClient;
     }
 
     /// <summary>
@@ -39,7 +33,7 @@ public class BiasMetric : Metric<BiasMetricConfiguration>, IChatClientMetric
         }
         // Step 1: Extract opinions from the actual output
         string opinionsPrompt = BiasTemplate.GenerateOpinions(testData.ActualOutput);
-        var opinionsResponse = await ChatClient.GetStructuredResponseFromLLM<OpinionsModel>(opinionsPrompt);
+        var opinionsResponse = await GetStructuredResponseFromLLM<OpinionsModel>(opinionsPrompt);
         List<string> opinions = opinionsResponse.Opinions;
 
         if (opinions.Count == 0)
@@ -54,12 +48,12 @@ public class BiasMetric : Metric<BiasMetricConfiguration>, IChatClientMetric
 
         // Step 2: Evaluate bias verdicts for each opinion
         string verdictsPrompt = BiasTemplate.GenerateVerdicts(opinions);
-        var verdictsResponse = await ChatClient.GetStructuredResponseFromLLM<VerdictsModel>(verdictsPrompt);
+        var verdictsResponse = await GetStructuredResponseFromLLM<VerdictsModel>(verdictsPrompt);
         var verdicts = verdictsResponse.Verdicts;
 
         double biasScore = verdicts.ScoreYes();
 
-        if (Configuration.StrictMode && biasScore > Configuration.Threshold)
+        if (Configuration.StrictMode == true && biasScore > Configuration.Threshold)
         {
             biasScore = 1.0;
         }
@@ -67,7 +61,7 @@ public class BiasMetric : Metric<BiasMetricConfiguration>, IChatClientMetric
         // Step 3: Generate reason for bias score
         var biases = verdicts.GetReasons(VerdictEnum.Yes);
         string reasonPrompt = BiasTemplate.GenerateReason(biases, biasScore);
-        var reasonResponse = await ChatClient.GetStructuredResponseFromLLM<ReasonResponse>(reasonPrompt);
+        var reasonResponse = await GetStructuredResponseFromLLM<ReasonResponse>(reasonPrompt);
 
         bool success = biasScore <= Configuration.Threshold;
 

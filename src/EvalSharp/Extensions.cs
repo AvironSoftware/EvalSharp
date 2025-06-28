@@ -6,6 +6,7 @@ using EvalSharp.JsonConverters;
 using EvalSharp.Models;
 using EvalSharp.Models.Enums;
 using EvalSharp.Scoring;
+using ChatMessage = Microsoft.Extensions.AI.ChatMessage;
 
 #pragma warning disable SKEXP0010
 
@@ -20,24 +21,53 @@ internal static class Extensions
         Converters = { new VerdictEnumConverter() }
     };
     
-    public static async Task<TResponse> GetStructuredResponseFromLLM<TResponse>(this IChatClient chatCompletionService, string prompt)
+    public static async Task<TResponse> GetStructuredResponseFromLLM<TResponse>(
+        this IChatClient chatCompletionService, 
+        string prompt, 
+        LLMAsAJudgeMetricConfiguration metricConfiguration
+    )
         where TResponse : class
     {
-        var responseAsync = (await chatCompletionService.GetResponseAsync<TResponse>(prompt, _serializerOptions));
+        var chatOptions = new ChatOptions
+        {
+            Temperature = metricConfiguration.Temperature
+        };
+        var chatHistory = new List<ChatMessage>();
+        if (!string.IsNullOrWhiteSpace(metricConfiguration.SystemPrompt))
+        {
+            chatHistory.Add(new ChatMessage(ChatRole.System, metricConfiguration.SystemPrompt));
+        }
+        chatHistory.Add(new ChatMessage(ChatRole.User, prompt));
+        
+        var responseAsync = (await chatCompletionService.GetResponseAsync<TResponse>(
+            chatHistory,
+            _serializerOptions,
+            chatOptions
+        ));
         return responseAsync.Result;
     }
     
     public static async Task<(TResponse Response, ChatResponse<TResponse> ChatResponse)> GetStructuredResponseFromLLMWithOriginalResponse<TResponse>(
         this IChatClient chatCompletionService, 
-        string prompt,
+        string prompt, 
+        LLMAsAJudgeMetricConfiguration metricConfiguration,
         Action<ChatOptions>? configureSettings = null
     )
         where TResponse : class
     {
         var chatOptions = new ChatOptions();
+        chatOptions.Temperature = metricConfiguration.Temperature;
         configureSettings?.Invoke(chatOptions);
+        
+        var chatHistory = new List<ChatMessage>();
+        if (!string.IsNullOrWhiteSpace(metricConfiguration.SystemPrompt))
+        {
+            chatHistory.Add(new ChatMessage(ChatRole.System, metricConfiguration.SystemPrompt));
+        }
+        chatHistory.Add(new ChatMessage(ChatRole.User, prompt));
+        
         var resp = await chatCompletionService.GetResponseAsync<TResponse>(
-            prompt,
+            chatHistory,
             _serializerOptions,
             chatOptions
         );

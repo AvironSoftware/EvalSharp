@@ -1,6 +1,5 @@
 
 using EvalSharp.Scoring;
-using EvalSharp.Scoring.PromptAlignment;
 using Xunit.Abstractions;
 
 namespace EvalSharp.Tests;

@@ -8,21 +8,15 @@ namespace EvalSharp.Scoring;
 /// <summary>
 /// Represents a metric for evaluating summarization quality.
 /// </summary>
-public class SummarizationMetric : Metric<SummarizationMetricConfiguration>, IChatClientMetric
+public class SummarizationMetric : LLMAsAJudgeMetric<SummarizationMetricConfiguration>, IChatClientMetric
 {
-    /// <summary>
-    /// Gets the chat client used for interacting with the language model.
-    /// </summary>
-    public IChatClient ChatClient { get; }
-
     /// <summary>
     /// Initializes a new instance of the <see cref="SummarizationMetric"/> class.
     /// </summary>
     /// <param name="chatClient">The chat client used for language model interactions.</param>
     /// <param name="configuration">The configuration for the summarization metric.</param>
-    public SummarizationMetric(IChatClient chatClient, SummarizationMetricConfiguration configuration) : base(configuration)
+    public SummarizationMetric(IChatClient chatClient, SummarizationMetricConfiguration configuration) : base(configuration, chatClient)
     {
-        ChatClient = chatClient;
     }
 
     /// <summary>
@@ -46,9 +40,10 @@ public class SummarizationMetric : Metric<SummarizationMetricConfiguration>, ICh
             Configuration.AssessmentQuestions = null;
         }
 
-        if (Configuration.StrictMode)
+        var threshold = Configuration.Threshold;
+        if (Configuration.StrictMode == true)
         {
-            Configuration.Threshold = 1;
+            threshold = 1;
         }
 
         // Step 1: Extract truths from original input
@@ -74,7 +69,7 @@ public class SummarizationMetric : Metric<SummarizationMetricConfiguration>, ICh
             : string.Empty;
 
         // Step 7: Determine pass/fail
-        bool success = finalScore >= Configuration.Threshold;
+        bool success = finalScore >= threshold;
 
         return new MetricScore(testData)
         {
@@ -87,13 +82,13 @@ public class SummarizationMetric : Metric<SummarizationMetricConfiguration>, ICh
     private async Task<string[]> ExtractTruths(EvaluatorTestData context, int? limit)
     {
         string prompt = FaithfulnessTemplate.GenerateTruths(context.InitialInput!, limit);
-        return (await ChatClient.GetStructuredResponseFromLLM<TruthsModel>(prompt)).Truths;
+        return (await GetStructuredResponseFromLLM<TruthsModel>(prompt)).Truths;
     }
 
     private async Task<string[]> ExtractClaims(EvaluatorTestData context)
     {
         string prompt = FaithfulnessTemplate.GenerateClaims(context.ActualOutput!);
-        return (await ChatClient.GetStructuredResponseFromLLM<ClaimsModel>(prompt)).Claims;
+        return (await GetStructuredResponseFromLLM<ClaimsModel>(prompt)).Claims;
     }
 
     private async Task<List<SummarizationCoverageVerdict>> GenerateCoverageVerdicts(EvaluatorTestData context)
@@ -103,17 +98,17 @@ public class SummarizationMetric : Metric<SummarizationMetricConfiguration>, ICh
         if (questions == null || questions.Count == 0)
         {
             string questionPrompt = SummarizationTemplate.GenerateQuestions(context.InitialInput!, Configuration.NumQuestions);
-            var questionResponse = await ChatClient.GetStructuredResponseFromLLM<QuestionsModel>(questionPrompt);
+            var questionResponse = await GetStructuredResponseFromLLM<QuestionsModel>(questionPrompt);
             questions = questionResponse.Questions;
         }
 
         // Step 2: Get answers from original text
         string originalAnswerPrompt = SummarizationTemplate.GenerateAnswers(questions, context.InitialInput!);
-        var originalAnswers = await ChatClient.GetStructuredResponseFromLLM<AnswersModel>(originalAnswerPrompt);
+        var originalAnswers = await GetStructuredResponseFromLLM<AnswersModel>(originalAnswerPrompt);
 
         // Step 3: Get answers from summary
         string summaryAnswerPrompt = SummarizationTemplate.GenerateAnswers(questions, context.ActualOutput!);
-        var summaryAnswers = await ChatClient.GetStructuredResponseFromLLM<AnswersModel>(summaryAnswerPrompt);
+        var summaryAnswers = await GetStructuredResponseFromLLM<AnswersModel>(summaryAnswerPrompt);
 
         // Step 4: Compare answers to form verdicts
         if (originalAnswers.Answers.Length != summaryAnswers.Answers.Length)
@@ -140,7 +135,7 @@ public class SummarizationMetric : Metric<SummarizationMetricConfiguration>, ICh
 
         string joinedTruths = string.Join("\n\n", truths);
         string prompt = SummarizationTemplate.GenerateAlignmentVerdicts(claims, joinedTruths);
-        return (await ChatClient.GetStructuredResponseFromLLM<VerdictsModel>(prompt)).Verdicts;
+        return (await GetStructuredResponseFromLLM<VerdictsModel>(prompt)).Verdicts;
     }
 
 
@@ -157,7 +152,7 @@ public class SummarizationMetric : Metric<SummarizationMetricConfiguration>, ICh
         var questions = coverageVerdicts.GetReasons();
 
         string prompt = SummarizationTemplate.GenerateReason(contradictions, redundancies, questions, score);
-        var response = await ChatClient.GetStructuredResponseFromLLM<ReasonResponse>(prompt);
+        var response = await GetStructuredResponseFromLLM<ReasonResponse>(prompt);
         return response.Reason;
     }
 }

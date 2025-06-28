@@ -57,7 +57,7 @@ public class ToolCorrectnessMetric : Metric<ToolCorrectnessMetricConfiguration>
             score = CalculateNonExactMatchScore(toolsCalled, expectedTools);
         }
 
-        bool success = score >= Configuration.Threshold;
+        bool success = score >= (Configuration.StrictMode == true ? 1 : Configuration.Threshold);
 
         return Task.FromResult(new MetricScore(testData)
         {

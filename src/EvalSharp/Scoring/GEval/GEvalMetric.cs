@@ -7,21 +7,15 @@ namespace EvalSharp.Scoring;
 /// <summary>
 /// Represents a metric for evaluating the output of a language model using GEval.
 /// </summary>
-public class GEvalMetric : Metric<GEvalMetricConfiguration>, IChatClientMetric
+public class GEvalMetric : LLMAsAJudgeMetric<GEvalMetricConfiguration>, IChatClientMetric
 {
-    /// <summary>
-    /// Gets the chat client used for interacting with the language model.
-    /// </summary>
-    public IChatClient ChatClient { get; }
-
     /// <summary>
     /// Initializes a new instance of the <see cref="GEvalMetric"/> class.
     /// </summary>
     /// <param name="chatClient">The chat client used for interacting with the language model.</param>
     /// <param name="configuration">The configuration for the GEval metric.</param>
-    public GEvalMetric(IChatClient chatClient, GEvalMetricConfiguration configuration) : base(configuration)
+    public GEvalMetric(IChatClient chatClient, GEvalMetricConfiguration configuration) : base(configuration, chatClient)
     {
-        ChatClient = chatClient;
     }
 
     /// <summary>
@@ -76,7 +70,7 @@ public class GEvalMetric : Metric<GEvalMetricConfiguration>, IChatClientMetric
             string stepsPrompt = GEvalTemplate.GenerateEvaluationSteps(Configuration.Criteria!);
 
             // Call the LLM to get a structured response with the steps.
-            StepsResponse stepsResponse = await ChatClient.GetStructuredResponseFromLLM<StepsResponse>(stepsPrompt);
+            StepsResponse stepsResponse = await GetStructuredResponseFromLLM<StepsResponse>(stepsPrompt);
 
             // Format steps as a numbered list.
             evaluationStepList = stepsResponse.Steps.Select((step, i) => $"{i + 1}. {step}").ToList();
@@ -95,6 +89,7 @@ public class GEvalMetric : Metric<GEvalMetricConfiguration>, IChatClientMetric
         // 4. Call the ChatCompletionService to obtain the evaluation result.
         var (evalResponse, chatMessageContent) = await ChatClient.GetStructuredResponseFromLLMWithOriginalResponse<EvaluationResponse>(
             evaluationPrompt,
+            Configuration,
             options =>
             {
                 //lmao this is the hackiest thing ever
@@ -116,7 +111,7 @@ public class GEvalMetric : Metric<GEvalMetricConfiguration>, IChatClientMetric
 
         // 7. Apply strict mode logic if enabled.
         bool success;
-        if (Configuration.StrictMode)
+        if (Configuration.StrictMode == true)
         {
             if (normalizedScore < 1.0)
             {

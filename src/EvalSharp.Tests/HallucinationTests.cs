@@ -1,5 +1,4 @@
 ﻿using EvalSharp.Scoring;
-using EvalSharp.Scoring.Hallucination;
 using Xunit.Abstractions;
 
 namespace EvalSharp.Tests;

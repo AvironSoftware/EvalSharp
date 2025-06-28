@@ -1,6 +1,4 @@
-﻿using EvalSharp;
-
-namespace EvalSharp.Scoring.Bias;
+﻿namespace EvalSharp.Scoring.Bias;
 internal static class BiasTemplate
 {
     //Prompt adapted from deepeval, licensed under Apache 2.0

@@ -102,7 +102,7 @@ public class CustomComboTests
             false);  // should fail (both metrics)
 
 
-    public class FaithfulRelevancyConfiguration : MetricConfiguration
+    public record FaithfulRelevancyConfiguration : MetricConfiguration
     {
         public bool IncludeReason { get; set; }
     }
@@ -138,7 +138,7 @@ public class CustomComboTests
             // Custom logic to set score
             var compositeScore = Math.Min(relevancyScore, faithfulnessScore);
 
-            var score = Configuration.StrictMode && compositeScore < Configuration.Threshold ? 0 : compositeScore;
+            var score = Configuration.StrictMode == true && compositeScore < Configuration.Threshold ? 0 : compositeScore;
             var reason = Configuration.IncludeReason ? relevancyReason + "\n" + faithfulnessReason : null;
             var success = score >= Configuration.Threshold;
 

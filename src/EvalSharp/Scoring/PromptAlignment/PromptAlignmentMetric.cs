@@ -7,21 +7,15 @@ namespace EvalSharp.Scoring;
 /// <summary>
 /// Represents a metric for evaluating prompt alignment in chat-based systems.
 /// </summary>
-public class PromptAlignmentMetric : Metric<PromptAlignmentMetricConfiguration>, IChatClientMetric
+public class PromptAlignmentMetric : LLMAsAJudgeMetric<PromptAlignmentMetricConfiguration>, IChatClientMetric
 {
-    /// <summary>
-    /// Gets the chat client used for interacting with the language model.
-    /// </summary>
-    public IChatClient ChatClient { get; }
-
     /// <summary>
     /// Initializes a new instance of the <see cref="PromptAlignmentMetric"/> class.
     /// </summary>
     /// <param name="chatClient">The chat client used for language model interactions.</param>
     /// <param name="configuration">The configuration for the prompt alignment metric.</param>
-    public PromptAlignmentMetric(IChatClient chatClient, PromptAlignmentMetricConfiguration configuration) : base(configuration)
+    public PromptAlignmentMetric(IChatClient chatClient, PromptAlignmentMetricConfiguration configuration) : base(configuration, chatClient)
     {
-        ChatClient = chatClient;
     }
 
     /// <summary>
@@ -56,7 +50,7 @@ public class PromptAlignmentMetric : Metric<PromptAlignmentMetricConfiguration>,
         string reason = Configuration.IncludeReason ? await GenerateReasonAsync(testData, verdicts, score) : "";
 
         // Step 4: Determine success
-        bool success = score >= Configuration.Threshold;
+        bool success = score >= (Configuration.StrictMode == true ? 1 : Configuration.Threshold);
 
         return new MetricScore(testData)
         {
@@ -79,7 +73,7 @@ public class PromptAlignmentMetric : Metric<PromptAlignmentMetricConfiguration>,
             testData.ActualOutput!
         );
 
-        var response = await ChatClient.GetStructuredResponseFromLLM<VerdictsModel>(prompt);
+        var response = await GetStructuredResponseFromLLM<VerdictsModel>(prompt);
         return response.Verdicts ?? [];
     }
 
@@ -101,7 +95,7 @@ public class PromptAlignmentMetric : Metric<PromptAlignmentMetricConfiguration>,
             score
         );
 
-        var response = await ChatClient.GetStructuredResponseFromLLM<ReasonResponse>(prompt);
+        var response = await GetStructuredResponseFromLLM<ReasonResponse>(prompt);
         return response.Reason;
     }
 }

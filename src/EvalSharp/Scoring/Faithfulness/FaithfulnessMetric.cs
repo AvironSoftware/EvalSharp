@@ -8,21 +8,15 @@ namespace EvalSharp.Scoring;
 /// <summary>
 /// Represents a metric for evaluating the faithfulness of a chat client's responses.
 /// </summary>
-public class FaithfulnessMetric : Metric<FaithfulnessMetricConfiguration>, IChatClientMetric
+public class FaithfulnessMetric : LLMAsAJudgeMetric<FaithfulnessMetricConfiguration>, IChatClientMetric
 {
-    /// <summary>
-    /// Gets the chat client used for generating responses and structured data.
-    /// </summary>
-    public IChatClient ChatClient { get; }
-
     /// <summary>
     /// Initializes a new instance of the <see cref="FaithfulnessMetric"/> class.
     /// </summary>
     /// <param name="chatClient">The chat client used for generating responses.</param>
     /// <param name="configuration">The configuration settings for the faithfulness metric.</param>
-    public FaithfulnessMetric(IChatClient chatClient, FaithfulnessMetricConfiguration configuration) : base(configuration)
+    public FaithfulnessMetric(IChatClient chatClient, FaithfulnessMetricConfiguration configuration) : base(configuration, chatClient)
     {
-        ChatClient = chatClient;
     }
 
     /// <summary>
@@ -59,7 +53,7 @@ public class FaithfulnessMetric : Metric<FaithfulnessMetricConfiguration>, IChat
         var reason = Configuration.IncludeReason ? await GenerateReason(testData, score, verdicts) : "";
 
         // Step 6: Determine success
-        bool success = score >= Configuration.Threshold;
+        bool success = score >= (Configuration.StrictMode == true ? 1 : Configuration.Threshold);
 
         return new MetricScore(testData)
         {
@@ -79,7 +73,7 @@ public class FaithfulnessMetric : Metric<FaithfulnessMetricConfiguration>, IChat
     {
         string joinedContext = string.Join("\n\n", context.RetrievalContext!);
         string prompt = FaithfulnessTemplate.GenerateTruths(joinedContext, truthsExtractionLimit);
-        return (await ChatClient.GetStructuredResponseFromLLM<TruthsModel>(prompt)).Truths;
+        return (await GetStructuredResponseFromLLM<TruthsModel>(prompt)).Truths;
     }
 
     /// <summary>
@@ -90,7 +84,7 @@ public class FaithfulnessMetric : Metric<FaithfulnessMetricConfiguration>, IChat
     private async Task<string[]> ExtractClaims(EvaluatorTestData context)
     {
         string prompt = FaithfulnessTemplate.GenerateClaims(context.ActualOutput!);
-        return (await ChatClient.GetStructuredResponseFromLLM<ClaimsModel>(prompt)).Claims;
+        return (await GetStructuredResponseFromLLM<ClaimsModel>(prompt)).Claims;
     }
 
     /// <summary>
@@ -105,7 +99,7 @@ public class FaithfulnessMetric : Metric<FaithfulnessMetricConfiguration>, IChat
         if (claims.Length == 0) return Array.Empty<VerdictModel>();
 
         string prompt = FaithfulnessTemplate.GenerateVerdicts(claims, truths);
-        return (await ChatClient.GetStructuredResponseFromLLM<VerdictsModel>(prompt)).Verdicts;
+        return (await GetStructuredResponseFromLLM<VerdictsModel>(prompt)).Verdicts;
     }
 
     /// <summary>
@@ -119,7 +113,7 @@ public class FaithfulnessMetric : Metric<FaithfulnessMetricConfiguration>, IChat
     {
         var contradictions = verdicts.GetReasons(VerdictEnum.No);
         string prompt = FaithfulnessTemplate.GenerateReason(score, contradictions);
-        var reasonResponse = await ChatClient.GetStructuredResponseFromLLM<ReasonResponse>(prompt);
+        var reasonResponse = await GetStructuredResponseFromLLM<ReasonResponse>(prompt);
         return reasonResponse.Reason;
     }
 }

@@ -7,21 +7,15 @@ namespace EvalSharp.Scoring;
 /// <summary>
 /// Represents a metric for evaluating hallucination in LLM outputs.
 /// </summary>
-public class HallucinationMetric : Metric<HallucinationMetricConfiguration>, IChatClientMetric
+public class HallucinationMetric : LLMAsAJudgeMetric<HallucinationMetricConfiguration>, IChatClientMetric
 {
-    /// <summary>
-    /// Gets the chat client used for generating responses and structured data.
-    /// </summary>
-    public IChatClient ChatClient { get; }
-
     /// <summary>
     /// Initializes a new instance of the <see cref="HallucinationMetric"/> class.
     /// </summary>
     /// <param name="chatClient">The chat client used for generating responses.</param>
     /// <param name="configuration">The configuration for the hallucination metric.</param>
-    public HallucinationMetric(IChatClient chatClient, HallucinationMetricConfiguration configuration) : base(configuration)
+    public HallucinationMetric(IChatClient chatClient, HallucinationMetricConfiguration configuration) : base(configuration, chatClient)
     {
-        ChatClient = chatClient;
     }
 
     /// <summary>
@@ -52,7 +46,7 @@ public class HallucinationMetric : Metric<HallucinationMetricConfiguration>, ICh
         var reason = Configuration.IncludeReason ? await GenerateReason(testData, score, verdicts) : "";
 
         // Step 4: Determine success
-        bool success = score <= Configuration.Threshold;
+        bool success = score >= (Configuration.StrictMode == true ? 1 : Configuration.Threshold);
 
         return new MetricScore(testData)
         {
@@ -70,7 +64,7 @@ public class HallucinationMetric : Metric<HallucinationMetricConfiguration>, ICh
     private async Task<VerdictModel[]> GenerateVerdicts(EvaluatorTestData context)
     {
         string prompt = HallucinationTemplate.GenerateVerdicts(context.ActualOutput!, context.Context!);
-        return (await ChatClient.GetStructuredResponseFromLLM<VerdictsModel>(prompt)).Verdicts;
+        return (await GetStructuredResponseFromLLM<VerdictsModel>(prompt)).Verdicts;
     }
 
     /// <summary>
@@ -85,7 +79,7 @@ public class HallucinationMetric : Metric<HallucinationMetricConfiguration>, ICh
         var factualAlignments = verdicts.GetReasons(VerdictEnum.Yes);
         var contradictions = verdicts.GetReasons(VerdictEnum.No);
         string prompt = HallucinationTemplate.GenerateReason(factualAlignments, contradictions, score);
-        var reasonResponse = await ChatClient.GetStructuredResponseFromLLM<ReasonResponse>(prompt);
+        var reasonResponse = await GetStructuredResponseFromLLM<ReasonResponse>(prompt);
         return reasonResponse.Reason;
     }
 }

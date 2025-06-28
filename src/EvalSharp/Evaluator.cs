@@ -1,8 +1,6 @@
 using CsvHelper.Configuration;
 using Microsoft.Extensions.AI;
-using Spectre.Console;
 using System.Collections.Concurrent;
-using System.Linq.Expressions;
 using System.Text.Json;
 using EvalSharp.Helpers;
 using EvalSharp.Models.Enums;
@@ -10,7 +8,6 @@ using EvalSharp.Scoring;
 using EvalSharp.Exceptions;
 
 namespace EvalSharp;
-
 
 /// <summary>
 /// Used to create Evaluator instances that can run metrics against a dataset.
@@ -33,7 +30,7 @@ public static class Evaluator
     /// <param name="chatClient">LLM chat client</param>
     /// <param name="data">Dataset to run metrics against</param>
     /// <param name="map">Mapping from the provided dataset <typeparamref name="T"/> to EvaluatorTestData</param>
-    public static Evaluator<T> FromData<T>(IChatClient chatClient, IEnumerable<T> data, Expression<Func<T, EvaluatorTestData>> map)
+    public static Evaluator<T> FromData<T>(IChatClient chatClient, IEnumerable<T> data, Func<T, EvaluatorTestData> map)
     {
         return new Evaluator<T>(chatClient, data, map);
     }
@@ -46,7 +43,7 @@ public static class Evaluator
     /// <param name="json">Valid JSON string</param>
     /// <param name="map">Mapping from the provided dataset<typeparamref name="T"/> to EvaluatorTestData</param>
     /// <param name="jsonOptions">optional JSON options</param>
-    public static Evaluator<T> FromJson<T>(IChatClient chatClient, string json, Expression<Func<T, EvaluatorTestData>> map, JsonSerializerOptions? jsonOptions = null)
+    public static Evaluator<T> FromJson<T>(IChatClient chatClient, string json, Func<T, EvaluatorTestData> map, JsonSerializerOptions? jsonOptions = null)
     {
         var data = JsonDataLoader.LoadJson<T>(json, jsonOptions);
         return new Evaluator<T>(chatClient, data, map);
@@ -60,7 +57,7 @@ public static class Evaluator
     /// <param name="jsonLine">List of valid JSON lines</param>
     /// <param name="map">Mapping from the provided dataset<typeparamref name="T"/> to EvaluatorTestData</param>
     /// <param name="jsonOptions">optional JSON options</param>
-    public static Evaluator<T> FromJsonLines<T>(IChatClient chatClient, IEnumerable<string> jsonLine, Expression<Func<T, EvaluatorTestData>> map, JsonSerializerOptions? jsonOptions = null)
+    public static Evaluator<T> FromJsonLines<T>(IChatClient chatClient, IEnumerable<string> jsonLine, Func<T, EvaluatorTestData> map, JsonSerializerOptions? jsonOptions = null)
     {
         var data = JsonDataLoader.LoadJsonLines<T>(jsonLine, jsonOptions);
         return new Evaluator<T>(chatClient, data, map);
@@ -74,7 +71,7 @@ public static class Evaluator
     /// <param name="filePath">File path to a JSON file</param>
     /// <param name="map">Mapping from the provided dataset<typeparamref name="T"/> to EvaluatorTestData</param>
     /// <param name="jsonOptions">optional JSON options</param>
-    public static Evaluator<T> FromJsonFile<T>(IChatClient chatClient, string filePath, Expression<Func<T, EvaluatorTestData>> map, JsonSerializerOptions? jsonOptions = null)
+    public static Evaluator<T> FromJsonFile<T>(IChatClient chatClient, string filePath, Func<T, EvaluatorTestData> map, JsonSerializerOptions? jsonOptions = null)
     {
         var data = JsonDataLoader.LoadJsonFile<T>(filePath, jsonOptions);
         return new Evaluator<T>(chatClient, data, map);
@@ -88,7 +85,7 @@ public static class Evaluator
     /// <param name="csvText">Valid CSV string</param>
     /// <param name="map">Mapping from the provided dataset<typeparamref name="T"/> to EvaluatorTestData</param>
     /// <param name="config">optional CSV configurations</param>
-    public static Evaluator<T> FromCsv<T>(IChatClient chatClient, string csvText, Expression<Func<T, EvaluatorTestData>> map, CsvConfiguration? config = null)
+    public static Evaluator<T> FromCsv<T>(IChatClient chatClient, string csvText, Func<T, EvaluatorTestData> map, CsvConfiguration? config = null)
     {
         var data = CsvDataLoader.LoadCsv<T>(csvText, config);
         return new Evaluator<T>(chatClient, data, map);
@@ -102,7 +99,7 @@ public static class Evaluator
     /// <param name="filePath">File path to CSV file</param>
     /// <param name="map">Mapping from the provided dataset<typeparamref name="T"/> to EvaluatorTestData</param>
     /// <param name="config">optional CSV configurations</param>
-    public static Evaluator<T> FromCsvFile<T>(IChatClient chatClient, string filePath, Expression<Func<T, EvaluatorTestData>> map, CsvConfiguration? config = null)
+    public static Evaluator<T> FromCsvFile<T>(IChatClient chatClient, string filePath, Func<T, EvaluatorTestData> map, CsvConfiguration? config = null)
     {
         var data = CsvDataLoader.LoadCsv<T>(filePath, config);
         return new Evaluator<T>(chatClient, data, map);
@@ -115,6 +112,10 @@ public static class Evaluator
 /// <typeparam name="T">The type of the data being tested.</typeparam>
 public class Evaluator<T>
 {
+    /// <summary>
+    /// Configuration for all metrics for this evaluator. Settings specified here will not override metric-specific configurations.
+    /// </summary>
+    public EvaluatorConfiguration Configuration { get; }
     private IChatClient? ChatClient { get; }
     private IList<EvaluatorTestData> Data { get; }
     
@@ -133,13 +134,12 @@ public class Evaluator<T>
     /// <param name="chatClient">LLM chat client</param>
     /// <param name="data">Dataset to run metrics against</param>
     /// <param name="map">Mapping from the provided dataset <typeparamref name="T"/> to EvaluatorTestData</param>
-    public Evaluator(IChatClient chatClient, IEnumerable<T> data, Expression<Func<T, EvaluatorTestData>> map)
+    public Evaluator(IChatClient chatClient, IEnumerable<T> data, Func<T, EvaluatorTestData> map)
     {
+        Configuration = new();
         ChatClient = chatClient;
-        var compiledMap = map.Compile();
-        Data = [.. data.Select(compiledMap)];
+        Data = [..data.Select(map)];
     }
-
 
     /// <summary>
     /// Adds the metric to the evaluator. 
@@ -160,34 +160,30 @@ public class Evaluator<T>
     {
         CheckThatChatClientIsSet();
         EnsureFieldsAreSetForAnswerRelevancy();
+        config = CreateConfig(config);
         var metric = new AnswerRelevancyMetric(ChatClient!, config);
-        _metrics.Add(metric);
+        AddMetric(metric);
     }
 
     /// <summary>
     /// Creates the Answer Relevancy metric and adds it to the evaluator. 
     /// Answer Relevancy is a metric that uses an LLM-as-a-judge to evaluate the relevancy of a model's answers based on the input.
     /// </summary>
-    /// <param name="includeReason">Extra LLM call to retrieve the reason the LLM made its judgement</param>
-    /// <param name="strictMode">Enforces a binary metric score. Either perfect score of 1 or a failure of anything less. Defaulted to false.</param>
-    /// <param name="threshold">Threshold for what is considered a pass or failure. Defaulted to 0.5.</param>
-    public void AddAnswerRelevancy(bool includeReason = true, bool strictMode = false, double threshold = 0.5)
+    /// <param name="includeReason">Includes a reason that the LLM made its determination. Note that this will call an LLM a second time.</param>
+    /// <param name="strictMode">Enforces a binary metric score. Either perfect score of 1 or a failure of anything less. Defaults to false.</param>
+    /// <param name="threshold">Threshold for what is considered a pass or failure. Defaults to 0.5.</param>
+    public void AddAnswerRelevancy(bool? includeReason = null, bool? strictMode = null, double? threshold = null)
     {
         CheckThatChatClientIsSet();
         EnsureFieldsAreSetForAnswerRelevancy();
-        var config = new AnswerRelevancyMetricConfiguration
-        {
-            IncludeReason = includeReason,
-            StrictMode = strictMode,
-            Threshold = threshold
-        };
+        var config = CreateConfig<AnswerRelevancyMetricConfiguration>(includeReason, strictMode, threshold);
         var metric = new AnswerRelevancyMetric(ChatClient!, config);
-        _metrics.Add(metric);
+        AddMetric(metric);
     }
 
     /// <summary>
     /// Creates the Bias metric and adds it to the evaluator. 
-    /// Bias metric is a metric that uses an LLM-as-a-judge to evaluate the ouput of a model to determine if there is any bias.
+    /// Bias metric is a metric that uses an LLM-as-a-judge to evaluate the output of a model to determine if there is any bias.
     /// Bias is considered anything that's not fact or claim. IncludeReason parameter is helpful with identifying the LLMs reasoning.
     /// </summary>
     /// <param name="config">Configuration used to tune strict mode, threshold, and more.</param>
@@ -195,30 +191,26 @@ public class Evaluator<T>
     {
         CheckThatChatClientIsSet();
         EnsureFieldsAreSetForBias();
+        config = CreateConfig(config);
         var metric = new BiasMetric(ChatClient!, config);
-        _metrics.Add(metric);
+        AddMetric(metric);
     }
 
     /// <summary>
     /// Creates the Bias metric and adds it to the evaluator. 
-    /// Bias metric is a metric that uses an LLM-as-a-judge to evaluate the ouput of a model to determine if there is any bias.
+    /// Bias metric is a metric that uses an LLM-as-a-judge to evaluate the output of a model to determine if there is any bias.
     /// Bias is considered anything that's not fact or claim. IncludeReason parameter is helpful with identifying the LLMs reasoning.
     /// </summary>
-    /// <param name="includeReason">Extra LLM call to retrieve the reason the LLM made its judgement</param>
-    /// <param name="strictMode">Enforces a binary metric score. Either perfect score of 1 or a failure of anything less. Defaulted to false.</param>
-    /// <param name="threshold">Threshold for what is considered a pass or failure. Defaulted to 0.5.</param>
-    public void AddBias(bool includeReason = true, bool strictMode = false, double threshold = 0.5)
+    /// <param name="includeReason">Includes a reason that the LLM made its determination. Note that this will call an LLM a second time.</param>
+    /// <param name="strictMode">Enforces a binary metric score. Either perfect score of 1 or a failure of anything less. Defaults to false.</param>
+    /// <param name="threshold">Threshold for what is considered a pass or failure. Defaults to 0.5.</param>
+    public void AddBias(bool? includeReason = null, bool? strictMode = null, double? threshold = null)
     {
         CheckThatChatClientIsSet();
         EnsureFieldsAreSetForBias();
-        var config = new BiasMetricConfiguration
-        {
-            IncludeReason = includeReason,
-            StrictMode = strictMode,
-            Threshold = threshold
-        };
+        var config = CreateConfig<BiasMetricConfiguration>(includeReason, strictMode, threshold);
         var metric = new BiasMetric(ChatClient!, config);
-        _metrics.Add(metric);
+        AddMetric(metric);
     }
 
     /// <summary>
@@ -230,29 +222,25 @@ public class Evaluator<T>
     {
         CheckThatChatClientIsSet();
         EnsureFieldsAreSetForContextualPrecision();
+        config = CreateConfig(config);
         var metric = new ContextualPrecisionMetric(ChatClient!, config);
-        _metrics.Add(metric);
+        AddMetric(metric);
     }
 
     /// <summary>
     /// Creates the Contextual Precision metric and adds it to the evaluator. 
     /// Contextual Precision metric is a metric that uses an LLM-as-a-judge to evaluate that the nodes in your retrieval context are relevant to the input.
     /// </summary>
-    /// <param name="includeReason">Extra LLM call to retrieve the reason the LLM made its judgement</param>
-    /// <param name="strictMode">Enforces a binary metric score. Either perfect score of 1 or a failure of anything less. Defaulted to false.</param>
-    /// <param name="threshold">Threshold for what is considered a pass or failure. Defaulted to 0.5.</param>
-    public void AddContextualPrecision(bool includeReason = true, bool strictMode = false, double threshold = 0.5)
+    /// <param name="includeReason">Includes a reason that the LLM made its determination. Note that this will call an LLM a second time.</param>
+    /// <param name="strictMode">Enforces a binary metric score. Either perfect score of 1 or a failure of anything less. Defaults to false.</param>
+    /// <param name="threshold">Threshold for what is considered a pass or failure. Defaults to 0.5.</param>
+    public void AddContextualPrecision(bool? includeReason = null, bool? strictMode = null, double? threshold = null)
     {
         CheckThatChatClientIsSet();
         EnsureFieldsAreSetForContextualPrecision();
-        var config = new ContextualPrecisionMetricConfiguration
-        {
-            IncludeReason = includeReason,
-            StrictMode = strictMode,
-            Threshold = threshold
-        };
+        var config = CreateConfig<ContextualPrecisionMetricConfiguration>(includeReason, strictMode, threshold);
         var metric = new ContextualPrecisionMetric(ChatClient!, config);
-        _metrics.Add(metric);
+        AddMetric(metric);
     }
 
     /// <summary>
@@ -266,8 +254,9 @@ public class Evaluator<T>
     {
         CheckThatChatClientIsSet();
         EnsureFieldsAreSetForContextualRecall();
+        config = CreateConfig(config);
         var metric = new ContextualRecallMetric(ChatClient!, config);
-        _metrics.Add(metric);
+        AddMetric(metric);
     }
 
     /// <summary>
@@ -276,19 +265,15 @@ public class Evaluator<T>
     /// It works by splitting the expected output into individual statements to see which of those statements appear in your retrieved context.
     /// A higher score means your retrieval pipeline is doing a better job of finding all the relevant information.
     /// </summary>
-    /// <param name="strictMode">Enforces a binary metric score. Either perfect score of 1 or a failure of anything less. Defaulted to false.</param>
-    /// <param name="threshold">Threshold for what is considered a pass or failure. Defaulted to 0.5.</param>
-    public void AddContextualRecall(bool strictMode = false, double threshold = 0.5)
+    /// <param name="strictMode">Enforces a binary metric score. Either perfect score of 1 or a failure of anything less. Defaults to false.</param>
+    /// <param name="threshold">Threshold for what is considered a pass or failure. Defaults to 0.5.</param>
+    public void AddContextualRecall(bool? strictMode = null, double? threshold = null)
     {
         CheckThatChatClientIsSet();
         EnsureFieldsAreSetForContextualRecall();
-        var config = new ContextualRecallMetricConfiguration
-        {
-            StrictMode = strictMode,
-            Threshold = threshold
-        };
+        var config = CreateConfig<ContextualRecallMetricConfiguration>(null, strictMode, threshold);
         var metric = new ContextualRecallMetric(ChatClient!, config);
-        _metrics.Add(metric);
+        AddMetric(metric);
     }
 
     /// <summary>
@@ -302,8 +287,9 @@ public class Evaluator<T>
     {
         CheckThatChatClientIsSet();
         EnsureFieldsAreSetForFaithfulness();
+        config = CreateConfig(config);
         var metric = new FaithfulnessMetric(ChatClient!, config);
-        _metrics.Add(metric);
+        AddMetric(metric);
     }
 
 
@@ -314,22 +300,19 @@ public class Evaluator<T>
     /// You can specify how many truths are in the actual output by providing a truthsExtractionLimit or simply let the LLM decide by leaving it null.
     /// </summary>
     /// <param name="truthsExtractionLimit">Number of truths to extract from the actual output. Leaving this NULL will let the LLM decide</param>
-    /// <param name="includeReason">Extra LLM call to retrieve the reason the LLM made its judgement</param>
-    /// <param name="strictMode">Enforces a binary metric score. Either perfect score of 1 or a failure of anything less. Defaulted to false.</param>
-    /// <param name="threshold">Threshold for what is considered a pass or failure. Defaulted to 0.5.</param>
-    public void AddFaithfulness(int? truthsExtractionLimit = null, bool includeReason = true, bool strictMode = false, double threshold = 0.5)
+    /// <param name="includeReason">Includes a reason that the LLM made its determination. Note that this will call an LLM a second time.</param>
+    /// <param name="strictMode">Enforces a binary metric score. Either perfect score of 1 or a failure of anything less. Defaults to false.</param>
+    /// <param name="threshold">Threshold for what is considered a pass or failure. Defaults to 0.5.</param>
+    public void AddFaithfulness(int? truthsExtractionLimit = null, bool? includeReason = null, bool? strictMode = null, double? threshold = null)
     {
         CheckThatChatClientIsSet();
         EnsureFieldsAreSetForFaithfulness();
-        var config = new FaithfulnessMetricConfiguration
+        var config = CreateConfig<FaithfulnessMetricConfiguration>(includeReason, strictMode, threshold) with
         {
-            TruthsExtractionLimit = truthsExtractionLimit,
-            IncludeReason = includeReason,
-            StrictMode = strictMode,
-            Threshold = threshold
+            TruthsExtractionLimit = truthsExtractionLimit
         };
         var metric = new FaithfulnessMetric(ChatClient!, config);
-        _metrics.Add(metric);
+        AddMetric(metric);
     }
 
 
@@ -340,20 +323,19 @@ public class Evaluator<T>
     /// If you want to avoid the extra LLM call and/or want to tightly control the evaluation steps, you can use the overload that takes a list of evaluation steps.
     /// </summary>
     /// <param name="criteria">Description used to generate the evaluation steps.</param>
-    /// <param name="strictMode">Enforces a binary metric score. Either perfect score of 1 or a failure of anything less. Defaulted to false.</param>
-    /// <param name="threshold">Threshold for what is considered a pass or failure. Defaulted to 0.5.</param>
-    public void AddGEval(string criteria, bool strictMode = false, double threshold = 0.5)
+    /// <param name="includeReason">Includes a reason that the LLM made its determination. Note that this will call an LLM a second time.</param>
+    /// <param name="strictMode">Enforces a binary metric score. Either perfect score of 1 or a failure of anything less. Defaults to false.</param>
+    /// <param name="threshold">Threshold for what is considered a pass or failure. Defaults to 0.5.</param>
+    public void AddGEval(string criteria, bool? includeReason = null, bool? strictMode = null, double? threshold = null)
     {
         CheckThatChatClientIsSet();
         EnsureFieldsAreSetForGEval();
-        var config = new GEvalMetricConfiguration
+        var config = CreateConfig<GEvalMetricConfiguration>(includeReason, strictMode, threshold) with
         {
-            Criteria = criteria,
-            StrictMode = strictMode,
-            Threshold = threshold
+            Criteria = criteria
         };
         var metric = new GEvalMetric(ChatClient!, config);
-        _metrics.Add(metric);
+        AddMetric(metric);
     }
 
 
@@ -364,20 +346,19 @@ public class Evaluator<T>
     /// If you're unsure of the evaluation steps and are less concerned with the reliability of the metric score, you can use the overload that takes a single text of the criteria.
     /// </summary>
     /// <param name="evaluationSteps">List of strings that represent each step the LLM should use to evaluate</param>
-    /// <param name="strictMode">Enforces a binary metric score. Either perfect score of 1 or a failure of anything less. Defaulted to false.</param>
-    /// <param name="threshold">Threshold for what is considered a pass or failure. Defaulted to 0.5.</param>
-    public void AddGEval(IEnumerable<string> evaluationSteps, bool strictMode = false, double threshold = 0.5)
+    /// <param name="includeReason">Includes a reason that the LLM made its determination. Note that this will call an LLM a second time.</param>
+    /// <param name="strictMode">Enforces a binary metric score. Either perfect score of 1 or a failure of anything less. Defaults to false.</param>
+    /// <param name="threshold">Threshold for what is considered a pass or failure. Defaults to 0.5.</param>
+    public void AddGEval(IEnumerable<string> evaluationSteps, bool? includeReason = null, bool? strictMode = null, double? threshold = null)
     {
         CheckThatChatClientIsSet();
         EnsureFieldsAreSetForGEval();
-        var config = new GEvalMetricConfiguration
+        var config = CreateConfig<GEvalMetricConfiguration>(includeReason, strictMode, threshold) with
         {
-            EvaluationSteps = [.. evaluationSteps],
-            StrictMode = strictMode,
-            Threshold = threshold
+            EvaluationSteps = [.. evaluationSteps]
         };
         var metric = new GEvalMetric(ChatClient!, config);
-        _metrics.Add(metric);
+        AddMetric(metric);
     }
 
     /// <summary>
@@ -390,44 +371,41 @@ public class Evaluator<T>
     {
         CheckThatChatClientIsSet();
         EnsureFieldsAreSetForGEval();
+        config = CreateConfig(config);
         var metric = new GEvalMetric(ChatClient!, config);
-        _metrics.Add(metric);
+        AddMetric(metric);
     }
 
     /// <summary>
     /// Creates the Hallucination metric and adds it to the evaluator. 
     /// Hallucination metric is a metric that uses an LLM-as-a-judge to evaluate LLM hallucinations by analyzing the actual output and the context.
-    /// Hallucination metric uses the context as the source of truth and calculates how much the actual output disagrees with the context. From this calcuation, a score is derived.
+    /// Hallucination metric uses the context as the source of truth and calculates how much the actual output disagrees with the context. From this calculation, a score is derived.
     /// </summary>
     /// <param name="config">Configuration used to tune strict mode, threshold, and more.</param>
     public void AddHallucination(HallucinationMetricConfiguration config)
     {
         CheckThatChatClientIsSet();
         EnsureFieldsAreSetForHallucination();
+        config = CreateConfig(config);
         var metric = new HallucinationMetric(ChatClient!, config);
-        _metrics.Add(metric);
+        AddMetric(metric);
     }
 
     /// <summary>
     /// Creates the Hallucination metric and adds it to the evaluator. 
     /// Hallucination metric is a metric that uses an LLM-as-a-judge to evaluate LLM hallucinations by analyzing the actual output and the context.
-    /// Hallucination metric uses the context as the source of truth and calculates how much the actual output disagrees with the context. From this calcuation, a score is derived.
+    /// Hallucination metric uses the context as the source of truth and calculates how much the actual output disagrees with the context. From this calculation, a score is derived.
     /// </summary>
-    /// <param name="includeReason">Extra LLM call to retrieve the reason the LLM made its judgement</param>
-    /// <param name="strictMode">Enforces a binary metric score. Either perfect score of 1 or a failure of anything less. Defaulted to false.</param>
-    /// <param name="threshold">Threshold for what is considered a pass or failure. Defaulted to 0.5.</param>
-    public void AddHallucination(bool includeReason = true, bool strictMode = false, double threshold = 0.5)
+    /// <param name="includeReason">Includes a reason that the LLM made its determination. Note that this will call an LLM a second time.</param>
+    /// <param name="strictMode">Enforces a binary metric score. Either perfect score of 1 or a failure of anything less. Defaults to false.</param>
+    /// <param name="threshold">Threshold for what is considered a pass or failure. Defaults to 0.5.</param>
+    public void AddHallucination(bool? includeReason = null, bool? strictMode = null, double? threshold = null)
     {
         CheckThatChatClientIsSet();
         EnsureFieldsAreSetForHallucination();
-        var config = new HallucinationMetricConfiguration
-        {
-            IncludeReason = includeReason,
-            StrictMode = strictMode,
-            Threshold = threshold
-        };
+        var config = CreateConfig<HallucinationMetricConfiguration>(includeReason, strictMode, threshold);
         var metric = new HallucinationMetric(ChatClient!, config);
-        _metrics.Add(metric);
+        AddMetric(metric);
     }
 
     /// <summary>
@@ -439,8 +417,9 @@ public class Evaluator<T>
     {
         CheckThatChatClientIsSet();
         EnsureFieldsAreSetForPromptAlignment();
+        config = CreateConfig(config);
         var metric = new PromptAlignmentMetric(ChatClient!, config);
-        _metrics.Add(metric);
+        AddMetric(metric);
     }
 
     /// <summary>
@@ -448,22 +427,19 @@ public class Evaluator<T>
     /// Prompt Alignment metric is a metric that uses an LLM-as-a-judge to evaluate whether the model's output aligns with the specified prompt instructions.
     /// </summary>
     /// <param name="promptInstructions">List of instructions to validate against the model's response.</param>
-    /// <param name="includeReason">Extra LLM call to retrieve the reason the LLM made its judgement</param>
-    /// <param name="strictMode">Enforces a binary metric score. Either perfect score of 1 or a failure of anything less. Defaulted to false.</param>
-    /// <param name="threshold">Threshold for what is considered a pass or failure. Defaulted to 0.5.</param>
-    public void AddPromptAlignment(List<string> promptInstructions, bool includeReason = true, bool strictMode = false, double threshold = 0.5)
+    /// <param name="includeReason">Includes a reason that the LLM made its determination. Note that this will call an LLM a second time.</param>
+    /// <param name="strictMode">Enforces a binary metric score. Either perfect score of 1 or a failure of anything less. Defaults to false.</param>
+    /// <param name="threshold">Threshold for what is considered a pass or failure. Defaults to 0.5.</param>
+    public void AddPromptAlignment(IEnumerable<string> promptInstructions, bool? includeReason = null, bool? strictMode = null, double? threshold = null)
     {
         CheckThatChatClientIsSet();
         EnsureFieldsAreSetForPromptAlignment();
-        var config = new PromptAlignmentMetricConfiguration
+        var config = CreateConfig<PromptAlignmentMetricConfiguration>(includeReason, strictMode, threshold) with
         {
-            PromptInstructions = [.. promptInstructions],
-            IncludeReason = includeReason,
-            StrictMode = strictMode,
-            Threshold = threshold
+            PromptInstructions = [.. promptInstructions]
         };
         var metric = new PromptAlignmentMetric(ChatClient!, config);
-        _metrics.Add(metric);
+        AddMetric(metric);
     }
 
     /// <summary>
@@ -475,8 +451,9 @@ public class Evaluator<T>
     {
         CheckThatChatClientIsSet();
         EnsureFieldsAreSetForSummarization();
+        config = CreateConfig(config);
         var metric = new SummarizationMetric(ChatClient!, config);
-        _metrics.Add(metric);
+        AddMetric(metric);
     }
 
     /// <summary>
@@ -487,23 +464,20 @@ public class Evaluator<T>
     /// </summary>
     /// <param name="numQuestions">Number of assessment questions to generate when none are provided. Defaults to 5.</param>
     /// <param name="truthsExtractionLimit">Maximum number of factual claims to extract from the summary; null lets the LLM choose.</param>
-    /// <param name="includeReason">Extra LLM call to retrieve the reason the LLM made its judgement</param>
-    /// <param name="strictMode">Enforces a binary metric score. Either perfect score of 1 or a failure of anything less. Defaulted to false.</param>
-    /// <param name="threshold">Threshold for what is considered a pass or failure. Defaulted to 0.5.</param>
-    public void AddSummarization(int numQuestions = 5, int? truthsExtractionLimit = null, bool includeReason = true, bool strictMode = false, double threshold = 0.5)
+    /// <param name="includeReason">Includes a reason that the LLM made its determination. Note that this will call an LLM a second time.</param>
+    /// <param name="strictMode">Enforces a binary metric score. Either perfect score of 1 or a failure of anything less. Defaults to false.</param>
+    /// <param name="threshold">Threshold for what is considered a pass or failure. Defaults to 0.5.</param>
+    public void AddSummarization(int numQuestions = 5, int? truthsExtractionLimit = null, bool? includeReason = null, bool? strictMode = null, double? threshold = null)
     {
         CheckThatChatClientIsSet();
         EnsureFieldsAreSetForSummarization();
-        var config = new SummarizationMetricConfiguration
+        var config = CreateConfig<SummarizationMetricConfiguration>(includeReason, strictMode, threshold) with
         {
             TruthsExtractionLimit = truthsExtractionLimit,
-            NumQuestions = numQuestions,
-            IncludeReason = includeReason,
-            StrictMode = strictMode,
-            Threshold = threshold
+            NumQuestions = numQuestions
         };
         var metric = new SummarizationMetric(ChatClient!, config);
-        _metrics.Add(metric);
+        AddMetric(metric);
     }
 
     /// <summary>
@@ -514,23 +488,20 @@ public class Evaluator<T>
     /// </summary>
     /// <param name="assessmentQuestions">List of close-ended questions to assess summary quality that can be answered with yes or no.</param>
     /// <param name="truthsExtractionLimit">Maximum number of factual claims to extract from the original text (input); null lets the LLM choose.</param>
-    /// <param name="includeReason">Extra LLM call to retrieve the reason the LLM made its judgement</param>
-    /// <param name="strictMode">Enforces a binary metric score. Either perfect score of 1 or a failure of anything less. Defaulted to false.</param>
-    /// <param name="threshold">Threshold for what is considered a pass or failure. Defaulted to 0.5.</param>
-    public void AddSummarization(List<string> assessmentQuestions, int? truthsExtractionLimit = null, bool includeReason = true, bool strictMode = false, double threshold = 0.5)
+    /// <param name="includeReason">Includes a reason that the LLM made its determination. Note that this will call an LLM a second time.</param>
+    /// <param name="strictMode">Enforces a binary metric score. Either perfect score of 1 or a failure of anything less. Defaults to false.</param>
+    /// <param name="threshold">Threshold for what is considered a pass or failure. Defaults to 0.5.</param>
+    public void AddSummarization(List<string> assessmentQuestions, int? truthsExtractionLimit = null, bool? includeReason = null, bool? strictMode = null, double? threshold = null)
     {
         CheckThatChatClientIsSet();
         EnsureFieldsAreSetForSummarization();
-        var config = new SummarizationMetricConfiguration
+        var config = CreateConfig<SummarizationMetricConfiguration>(includeReason, strictMode, threshold) with
         {
             TruthsExtractionLimit = truthsExtractionLimit,
-            AssessmentQuestions = assessmentQuestions,
-            IncludeReason = includeReason,
-            StrictMode = strictMode,
-            Threshold = threshold
+            AssessmentQuestions = assessmentQuestions
         };
         var metric = new SummarizationMetric(ChatClient!, config);
-        _metrics.Add(metric);
+        AddMetric(metric);
     }
 
     /// <summary>
@@ -542,29 +513,25 @@ public class Evaluator<T>
     {
         CheckThatChatClientIsSet();
         EnsureFieldsAreSetForTaskCompletion();
+        config = CreateConfig(config);
         var metric = new TaskCompletionMetric(ChatClient!, config);
-        _metrics.Add(metric);
+        AddMetric(metric);
     }
 
     /// <summary>
     /// Creates the Task Completion metric and adds it to the evaluator.
     /// This metric uses an LLM-as-a-judge to measure how well the LLM fulfills explicit task instructions stated in the input based on the tools called and the actual output.
     /// </summary>
-    /// <param name="includeReason">Extra LLM call to retrieve the reason the LLM made its judgement</param>
-    /// <param name="strictMode">Enforces a binary metric score. Either perfect score of 1 or a failure of anything less. Defaulted to false.</param>
-    /// <param name="threshold">Threshold for what is considered a pass or failure. Defaulted to 0.5.</param>
-    public void AddTaskCompletion(bool includeReason = true, bool strictMode = false, double threshold = 0.5)
+    /// <param name="includeReason">Includes a reason that the LLM made its determination. Note that this will call an LLM a second time.</param>
+    /// <param name="strictMode">Enforces a binary metric score. Either perfect score of 1 or a failure of anything less. Defaults to false.</param>
+    /// <param name="threshold">Threshold for what is considered a pass or failure. Defaults to 0.5.</param>
+    public void AddTaskCompletion(bool? includeReason = null, bool? strictMode = null, double? threshold = null)
     {
         CheckThatChatClientIsSet();
         EnsureFieldsAreSetForTaskCompletion();
-        var config = new TaskCompletionMetricConfiguration
-        {
-            IncludeReason = includeReason,
-            StrictMode = strictMode,
-            Threshold = threshold
-        };
+        var config = CreateConfig<TaskCompletionMetricConfiguration>(includeReason, strictMode, threshold);
         var metric = new TaskCompletionMetric(ChatClient!, config);
-        _metrics.Add(metric);
+        AddMetric(metric);
     }
 
     /// <summary>
@@ -577,17 +544,17 @@ public class Evaluator<T>
     {
         EnsureFieldsAreSetForToolCorrectness();
         var metric = new ToolCorrectnessMetric(config);
-        _metrics.Add(metric);
+        AddMetric(metric);
     }
 
     /// <summary>
     /// Creates the Task Completion metric and adds it to the evaluator. This metric does NOT use LLM-as-a-judge.
     /// This metric evaluates whether tool calls match the expected tool calls.
     /// If you would like to evaluate the order of tool calls, set shouldConsiderOrdering to true.
-    /// A match is based on the evaluation parameters. Tool name's are always checked even if ToolCallParamsEnum.TOOL is not specified in the evaluation parameters.
+    /// A match is based on the evaluation parameters. Tool names are always checked even if ToolCallParamsEnum.TOOL is not specified in the evaluation parameters.
     /// </summary>
-    /// <param name="shouldConsiderOrdering">Indicates if order should be considered apart of the metric score</param>
-    /// <param name="threshold">Threshold for what is considered a pass or failure. Defaulted to 0.5.</param>
+    /// <param name="shouldConsiderOrdering">Indicates if order should be considered a part of the metric score</param>
+    /// <param name="threshold">Threshold for what is considered a pass or failure. Defaults to 0.5.</param>
     /// <param name="evaluationParams">List of tool call parameters to include in scoring; defaults to TOOL.</param>
     public void AddToolCorrectness(bool shouldConsiderOrdering = false, double threshold = 0.5, List<ToolCallParamsEnum>? evaluationParams = null)
     {
@@ -599,15 +566,15 @@ public class Evaluator<T>
             EvaluationParams = evaluationParams ?? [ToolCallParamsEnum.TOOL]
         };
         var metric = new ToolCorrectnessMetric(config);
-        _metrics.Add(metric);
+        AddMetric(metric);
     }
 
     /// <summary>
     /// Creates the Task Completion metric and adds it to the evaluator. This metric does NOT use LLM-as-a-judge.
     /// This metric evaluates whether tool calls EXACTLY match the expected tool calls and their respective order.
-    /// An exact match is based on the evaluation parameters. Tool name's are always checked even if ToolCallParamsEnum.TOOL is not specified in the evaluation parameters.
+    /// An exact match is based on the evaluation parameters. Tool names are always checked even if ToolCallParamsEnum.TOOL is not specified in the evaluation parameters.
     /// </summary>
-    /// <param name="threshold">Threshold for what is considered a pass or failure. Defaulted to 0.5.</param>
+    /// <param name="threshold">Threshold for what is considered a pass or failure. Defaults to 0.5.</param>
     /// <param name="evaluationParams">List of tool call parameters to include in scoring; defaults to TOOL.</param>
     public void AddToolCorrectnessExactMatch(double threshold = 0.5, List<ToolCallParamsEnum>? evaluationParams = null)
     {
@@ -619,7 +586,7 @@ public class Evaluator<T>
             EvaluationParams = evaluationParams ?? [ToolCallParamsEnum.TOOL]
         };
         var metric = new ToolCorrectnessMetric(config);
-        _metrics.Add(metric);
+        AddMetric(metric);
     }
 
     /// <summary>
@@ -630,7 +597,7 @@ public class Evaluator<T>
     {
         EnsureFieldsAreSetForMatch();
         var metric = MatchMetric.Exact();
-        _metrics.Add(metric);
+        AddMetric(metric);
     }
 
     /// <summary>
@@ -645,7 +612,7 @@ public class Evaluator<T>
     {
         EnsureFieldsAreSetForMatch();
         var metric = MatchMetric.Regex(matchRegexString, stringComparisonForAnswer);
-        _metrics.Add(metric);
+        AddMetric(metric);
     }
 
     /// <summary>
@@ -662,9 +629,8 @@ public class Evaluator<T>
     {
         EnsureFieldsAreSetForMatch();
         var metric = MatchMetric.AfterString(searchString);
-        _metrics.Add(metric);
+        AddMetric(metric);
     }
-
 
     /// <summary>
     /// Starts the evaluation process by running all added metrics against the provided data.
@@ -685,12 +651,12 @@ public class Evaluator<T>
         {
             var results = new ConcurrentBag<(Metric, MetricScore)>();
 
-            await Parallel.ForEachAsync(Metrics, async (metric, token) =>
+            await Parallel.ForEachAsync(Metrics, async (metric, _) =>
             {
                 var metricScore = await metric.ScoreAsync(test);
                 results.Add((metric, metricScore));
             });
-            var metricResultCollection = new MetricResultCollection(test!, [.. results]);
+            var metricResultCollection = new MetricResultCollection(test, [.. results]);
             scores.Tests.Add(metricResultCollection);
         }
 
@@ -705,6 +671,32 @@ public class Evaluator<T>
         {
             throw new InvalidOperationException("An instance of IChatClient is required to use this metric.");
         }
+    }
+    
+    private TConfiguration CreateConfig<TConfiguration>(TConfiguration originalConfiguration)
+        where TConfiguration : LLMAsAJudgeMetricConfiguration
+    {
+        return originalConfiguration with
+        {
+            SystemPrompt = originalConfiguration.SystemPrompt ?? Configuration.SystemPrompt,
+            Temperature = originalConfiguration.Temperature ?? Configuration.Temperature,
+            StrictMode = originalConfiguration.StrictMode ?? Configuration.StrictMode,
+            Threshold = originalConfiguration.Threshold,
+            IncludeReason = originalConfiguration.IncludeReason
+        };
+    }
+    
+    private TConfiguration CreateConfig<TConfiguration>(bool? includeReason, bool? strictMode, double? threshold)
+        where TConfiguration : LLMAsAJudgeMetricConfiguration, new()
+    {
+        return new TConfiguration
+        {
+            SystemPrompt = Configuration.SystemPrompt,
+            Temperature = Configuration.Temperature,
+            StrictMode = strictMode ?? Configuration.StrictMode,
+            Threshold = threshold ?? 0.5,
+            IncludeReason = includeReason ?? true,
+        };
     }
 
     private void PrintMetrics()
