@@ -14,6 +14,8 @@
         <DebugType>embedded</DebugType>
         <Description>An LLM evaluation library that allows you to easily test your LLM applications.</Description>
         <Copyright>Aviron Software LLC</Copyright>
+        <PackageReadmeFile>README.md</PackageReadmeFile>
+        <PackageLicenseExpression>MIT</PackageLicenseExpression>
     </PropertyGroup>
 
     <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
@@ -29,6 +31,10 @@
       <PackageReference Include="Microsoft.Extensions.AI" Version="9.5.0" />
       <PackageReference Include="Microsoft.Extensions.AI.OpenAI" Version="9.5.0-preview.1.25265.7" />
       <PackageReference Include="Spectre.Console" Version="0.49.1" />
+    </ItemGroup>
+    
+    <ItemGroup>
+        <None Include="../../README.md" Pack="true" PackagePath="\"/>
     </ItemGroup>
 
 </Project>
