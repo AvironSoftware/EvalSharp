@@ -4,6 +4,8 @@
 
 EvalSharp brings the power of reliable LLM evaluation directly to your C# projects. Inspired by [DeepEval](https://github.com/confident-ai/deepeval), but designed for the .NET ecosystem, EvalSharp lets you measure LLM outputs with confidence using familiar C# tools and patterns.
 
+### Docs/quick start here: https://www.evalsharp.com/docs/quick-start
+
 ---
 
 ## 🔥 Key Features
